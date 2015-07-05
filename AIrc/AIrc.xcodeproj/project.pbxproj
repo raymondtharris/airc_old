@@ -14,6 +14,10 @@
 		22B4E5171B484A1E0042B477 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B4E5151B484A1E0042B477 /* LaunchScreen.storyboard */; };
 		22B4E5221B484A1E0042B477 /* AIrcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E5211B484A1E0042B477 /* AIrcTests.swift */; };
 		22B4E52D1B484A1E0042B477 /* AIrcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E52C1B484A1E0042B477 /* AIrcUITests.swift */; };
+		22B4E53B1B484A740042B477 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E53A1B484A740042B477 /* Server.swift */; };
+		22B4E53D1B4851500042B477 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E53C1B48514F0042B477 /* Channel.swift */; };
+		22B4E53F1B4858970042B477 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E53E1B4858970042B477 /* User.swift */; };
+		22B4E5421B486E6E0042B477 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E5411B486E6E0042B477 /* Client.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		22B4E5281B484A1E0042B477 /* AIrcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AIrcUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B4E52C1B484A1E0042B477 /* AIrcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIrcUITests.swift; sourceTree = "<group>"; };
 		22B4E52E1B484A1E0042B477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22B4E53A1B484A740042B477 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		22B4E53C1B48514F0042B477 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		22B4E53E1B4858970042B477 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		22B4E5411B486E6E0042B477 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,8 @@
 			children = (
 				22B4E50C1B484A1E0042B477 /* AppDelegate.swift */,
 				22B4E50E1B484A1E0042B477 /* ViewController.swift */,
+				22B4E5411B486E6E0042B477 /* Client.swift */,
+				22B4E5401B485AD10042B477 /* Objects */,
 				22B4E5101B484A1E0042B477 /* Main.storyboard */,
 				22B4E5131B484A1E0042B477 /* Assets.xcassets */,
 				22B4E5151B484A1E0042B477 /* LaunchScreen.storyboard */,
@@ -123,6 +133,16 @@
 				22B4E52E1B484A1E0042B477 /* Info.plist */,
 			);
 			path = AIrcUITests;
+			sourceTree = "<group>";
+		};
+		22B4E5401B485AD10042B477 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				22B4E53A1B484A740042B477 /* Server.swift */,
+				22B4E53C1B48514F0042B477 /* Channel.swift */,
+				22B4E53E1B4858970042B477 /* User.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +276,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B4E50F1B484A1E0042B477 /* ViewController.swift in Sources */,
+				22B4E53D1B4851500042B477 /* Channel.swift in Sources */,
+				22B4E5421B486E6E0042B477 /* Client.swift in Sources */,
+				22B4E53B1B484A740042B477 /* Server.swift in Sources */,
+				22B4E53F1B4858970042B477 /* User.swift in Sources */,
 				22B4E50D1B484A1E0042B477 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
