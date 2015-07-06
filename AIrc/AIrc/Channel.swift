@@ -10,5 +10,10 @@ import Foundation
 
 struct AIChannel {
     var name: String
-    
+    var description: String{
+        return "\(name)"
+    }
+    mutating func changeName(name: String){
+        self.name = name
+    }
 }

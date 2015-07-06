@@ -36,6 +36,7 @@ class AIClient: NSObject {
         let request = NSURLRequest(URL: url)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data: NSData?, response: NSURLResponse?, error: NSError?) in
+            //display and store the data from connecting to the IRC server
         }
         task?.resume()
         addServer(server)

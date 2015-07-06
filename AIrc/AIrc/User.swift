@@ -12,5 +12,7 @@ import Foundation
 struct AIUser {
     var name:String
     var nickname:String
-    
+    var description: String{
+        return "\(name) \(nickname)"
+    }
 }
