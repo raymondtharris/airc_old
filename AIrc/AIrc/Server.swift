@@ -8,6 +8,9 @@
 
 import Foundation
 
+let UNSECURE_PORT = 6667
+let SECURE_PORT = 6697
+
 struct AIServer {
     var name:String
     var port:Int
@@ -15,6 +18,8 @@ struct AIServer {
     var connectedChannels:[AIChannel]
     var user:AIUser
     var serverChannelList:[AIChannel]
+    var useSecureConnection:Bool
+    var serverState: stateType
     
     var description: String{
         return "\(name) \(port) \(address)"
@@ -28,6 +33,11 @@ struct AIServer {
     }
     
     mutating func connectToChannel(channel:AIChannel){
+        if useSecureConnection{
+            self.port = SECURE_PORT
+        } else{
+            self.port = UNSECURE_PORT
+        }
         let url = NSURL(string: self.address + ":" + self.port.description + "/" + channel.name)!
         let request = NSURLRequest(URL: url)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {

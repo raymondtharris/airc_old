@@ -12,6 +12,9 @@ class AIClient: NSObject {
     var name:String
     var nickName: String
     var connectedServers:[AIServer]
+    override var description: String{
+        return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
+    }
     override init() {
         self.name = "Test"
         self.nickName = "Testing"
