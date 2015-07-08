@@ -32,7 +32,7 @@ struct AIServer {
         user = userData
     }
     
-    mutating func connectToChannel(channel:AIChannel){
+    mutating func joinChannel(channel:AIChannel){
         if useSecureConnection{
             self.port = SECURE_PORT
         } else{
@@ -43,6 +43,7 @@ struct AIServer {
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data: NSData?, response: NSURLResponse?, error: NSError?) in
             //display and store the data from connecting to the IRC server
+            
         }
         task?.resume()
         addChannel(channel)

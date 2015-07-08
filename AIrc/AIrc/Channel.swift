@@ -23,6 +23,7 @@ struct AIChannel {
     var name: String
     var unreadCount:Int
     var channelState: stateType
+    var mediaLibrary:[AIMedia]
     var description: String{
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }

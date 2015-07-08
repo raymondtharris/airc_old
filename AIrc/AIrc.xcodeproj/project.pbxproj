@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221CA39E1B4CD93700679BF4 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CA39D1B4CD93700679BF4 /* Media.swift */; };
 		22B4E50D1B484A1E0042B477 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E50C1B484A1E0042B477 /* AppDelegate.swift */; };
 		22B4E50F1B484A1E0042B477 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E50E1B484A1E0042B477 /* ViewController.swift */; };
 		22B4E5121B484A1E0042B477 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B4E5101B484A1E0042B477 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221CA39D1B4CD93700679BF4 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		22B4E5091B484A1E0042B477 /* AIrc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIrc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B4E50C1B484A1E0042B477 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22B4E50E1B484A1E0042B477 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				22B4E53A1B484A740042B477 /* Server.swift */,
 				22B4E53C1B48514F0042B477 /* Channel.swift */,
 				22B4E53E1B4858970042B477 /* User.swift */,
+				221CA39D1B4CD93700679BF4 /* Media.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				22B4E50F1B484A1E0042B477 /* ViewController.swift in Sources */,
 				22B4E53D1B4851500042B477 /* Channel.swift in Sources */,
+				221CA39E1B4CD93700679BF4 /* Media.swift in Sources */,
 				22B4E5421B486E6E0042B477 /* Client.swift in Sources */,
 				22B4E53B1B484A740042B477 /* Server.swift in Sources */,
 				22B4E53F1B4858970042B477 /* User.swift in Sources */,
@@ -507,6 +511,7 @@
 				22B4E5331B484A1E0042B477 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22B4E5341B484A1E0042B477 /* Build configuration list for PBXNativeTarget "AIrcTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +520,7 @@
 				22B4E5361B484A1E0042B477 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22B4E5371B484A1E0042B477 /* Build configuration list for PBXNativeTarget "AIrcUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +529,7 @@
 				22B4E5391B484A1E0042B477 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
