@@ -12,23 +12,24 @@ let UNSECURE_PORT = 6667
 let SECURE_PORT = 6697
 
 struct AIServer {
-    var name:String
-    var port:Int
-    var address:String
-    var connectedChannels:[AIChannel]
-    var user:AIUser
-    var serverChannelList:[AIChannel]
-    var useSecureConnection:Bool
-    var serverState: stateType
+    var name:String //Name of the server
+    var port:Int //Port number used to connect to server
+    var address:String //The address for the server
+    var connectedChannels:[AIChannel] //List of channels on server that have been connected to
+    var user:AIUser //User that is connecting to server
+    var serverChannelList:[AIChannel] //List of channels on the server
+    var useSecureConnection:Bool //Is connection using secure port
+    var serverState: stateType //State of server for the user
     
     var description: String{
+        //Description for AIServer
         return "\(name) \(port) \(address)"
     }
     
-    mutating func addChannel(channel:AIChannel){
+    mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
     }
-    mutating func updateUser(userData:AIUser){
+    mutating func updateUser(userData:AIUser){ //Updates user data
         user = userData
     }
     
