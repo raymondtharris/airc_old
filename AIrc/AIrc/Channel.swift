@@ -9,9 +9,9 @@
 import Foundation
 
 enum stateType : CustomStringConvertible{
-    case Connected
-    case Unconnected
-    var description:String{
+    case Connected //connected state
+    case Unconnected // unconnected state
+    var description:String{ // description variable
         switch self{
         case .Connected: return "Connected";
         case .Unconnected: return "Unconnected";
@@ -20,14 +20,14 @@ enum stateType : CustomStringConvertible{
 }
 
 struct AIChannel {
-    var name: String
-    var unreadCount:Int
-    var channelState: stateType
-    var mediaLibrary:[AIMedia]
-    var description: String{
+    var name: String // Name of the channel
+    var unreadCount:Int // Unread count of the channel
+    var channelState: stateType // State of the channel
+    var mediaLibrary:[AIMedia] // Array of media found on the channel
+    var description: String{ // Description of the channel
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }
-    mutating func changeName(name: String){
+    mutating func changeName(name: String){ // Changes the name of the channel
         self.name = name
     }
 }

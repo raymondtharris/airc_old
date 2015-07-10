@@ -34,6 +34,7 @@ struct AIServer {
     }
     
     mutating func joinChannel(channel:AIChannel){
+        // Function to join a channel found one the server
         if useSecureConnection{
             self.port = SECURE_PORT
         } else{

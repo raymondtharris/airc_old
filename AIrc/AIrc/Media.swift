@@ -24,9 +24,11 @@ enum mediaType : CustomStringConvertible{
 }
 
 struct AIMedia{
-    var name:String
-    var typeOfMedia:mediaType
-    var description:String{
+    var name:String //name of the media
+    var typeOfMedia:mediaType // type of media
+    var filesize:Int // filesize of the media object
+    var dateAdded: NSDate //Date object was added in chat
+    var description:String{ // description variable
         return "\(name) \(typeOfMedia)"
     }
 }

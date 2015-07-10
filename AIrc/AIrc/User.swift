@@ -10,9 +10,9 @@ import Foundation
 
 
 struct AIUser {
-    var name:String
-    var nickname:String
-    var description: String{
+    var name:String //User name
+    var nickname:String // Nickname for user
+    var description: String{ //description for user
         return "\(name) \(nickname)"
     }
 }
