@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum mediaType : CustomStringConvertible{
+enum mediaType : CustomStringConvertible{ // Media Types
     case Link
     case Image
     case Audio

@@ -9,11 +9,11 @@
 import Foundation
 
 class AIClient: NSObject {
-    var name:String
-    var nickName: String
-    var connectedServers:[AIServer]
-    var saveMediaLength:Int
-    override var description: String{
+    var name:String //Name for client
+    var nickName: String //Nickname for client
+    var connectedServers:[AIServer] // Array of conencted servers
+    var saveMediaLength:Int // media storage length
+    override var description: String{ // description string
         return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
     }
     override init() {
