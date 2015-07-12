@@ -24,6 +24,7 @@ struct AIChannel {
     var unreadCount:Int // Unread count of the channel
     var channelState: stateType // State of the channel
     var mediaLibrary:[AIMedia] // Array of media found on the channel
+    var autoReconnect:Bool //Recoonect to server automatically
     var description: String{ // Description of the channel
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }

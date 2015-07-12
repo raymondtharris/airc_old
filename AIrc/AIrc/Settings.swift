@@ -13,10 +13,20 @@ class ClientStettings{
     var useSameName:Bool
     var nickName:String
     var useSameNickname:Bool
+    var saveMediaLength:Int
+    var useSaveMediaLength:Bool
+    
+    var reconnectToServersOnOpen:Bool
+    var reconnectToChannelsOnOpen:Bool
+    
     init(){
         self.name = "Test"
         self.useSameName = true
         self.nickName = self.name
         self.useSameNickname = true
+        self.saveMediaLength = 4
+        self.useSaveMediaLength = true
+        self.reconnectToServersOnOpen = true
+        self.reconnectToChannelsOnOpen = false
     }
 }

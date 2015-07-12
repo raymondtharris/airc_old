@@ -11,8 +11,9 @@ import Foundation
 class AIClient: NSObject {
     var name:String //Name for client
     var nickName: String //Nickname for client
+    var settings: ClientStettings // client settings variable
     var connectedServers:[AIServer] // Array of conencted servers
-    var saveMediaLength:Int // media storage length
+    
     override var description: String{ // description string
         return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
     }
@@ -20,19 +21,19 @@ class AIClient: NSObject {
         self.name = "Test"
         self.nickName = "Testing"
         self.connectedServers = [AIServer]()
-        self.saveMediaLength = 4
+        self.settings = ClientStettings()
     }
     init(name:String, nickName:String) {
         self.name = name
         self.nickName = nickName
         self.connectedServers = [AIServer]()
-        self.saveMediaLength = 4
+        self.settings = ClientStettings()
     }
     init(name:String, nickName:String, connectedServers: [AIServer]){
         self.name = name
         self.nickName = nickName
         self.connectedServers = connectedServers
-        self.saveMediaLength = 4
+        self.settings = ClientStettings()
     }
     func addServer(server:AIServer){
         self.connectedServers.append(server)

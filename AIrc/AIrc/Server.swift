@@ -29,6 +29,12 @@ struct AIServer {
     mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
     }
+    mutating func removeChannel(channel:AIChannel){
+        
+    }
+    mutating func removeChannelByName(channelName:String){
+        
+    }
     mutating func updateUser(userData:AIUser){ //Updates user data
         user = userData
     }
