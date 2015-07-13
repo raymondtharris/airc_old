@@ -29,4 +29,15 @@ class ClientStettings{
         self.reconnectToServersOnOpen = true
         self.reconnectToChannelsOnOpen = false
     }
+    init(settings:ClientStettings){
+        self.name = settings.name
+        self.useSameName = settings.useSameName
+        self.nickName = settings.nickName
+        self.useSameNickname = settings.useSameNickname
+        self.saveMediaLength = settings.saveMediaLength
+        self.useSaveMediaLength = settings.useSaveMediaLength
+        self.reconnectToServersOnOpen = settings.reconnectToServersOnOpen
+        self.reconnectToChannelsOnOpen = settings.reconnectToChannelsOnOpen
+
+    }
 }

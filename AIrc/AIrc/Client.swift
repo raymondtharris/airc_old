@@ -38,6 +38,10 @@ class AIClient: NSObject {
     func addServer(server:AIServer){
         self.connectedServers.append(server)
     }
+    func removeServer(server:AIServer){
+        //removes a server
+        
+    }
     
     func connectedToServer(server: AIServer) -> Bool{
         let url = NSURL(string: server.address + ":" + server.port.description)!
