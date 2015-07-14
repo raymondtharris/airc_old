@@ -11,7 +11,7 @@ import Foundation
 let UNSECURE_PORT = 6667
 let SECURE_PORT = 6697
 
-struct AIServer {
+struct AIServer : Convenience {
     var name:String //Name of the server
     var port:Int //Port number used to connect to server
     var address:String //The address for the server
@@ -58,6 +58,13 @@ struct AIServer {
     }
     
     mutating func fetchChannelList(){
+        
+    }
+    
+    func connect() {
+        
+    }
+    func disconnect() {
         
     }
 }

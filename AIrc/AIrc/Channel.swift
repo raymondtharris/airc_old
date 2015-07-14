@@ -19,7 +19,13 @@ enum stateType : CustomStringConvertible{
     }
 }
 
-struct AIChannel {
+protocol Convenience{
+    func connect()
+    func disconnect()
+}
+
+
+struct AIChannel: Convenience {
     var name: String // Name of the channel
     var unreadCount:Int // Unread count of the channel
     var channelState: stateType // State of the channel
@@ -30,5 +36,12 @@ struct AIChannel {
     }
     mutating func changeName(name: String){ // Changes the name of the channel
         self.name = name
+    }
+    
+    func connect() {
+        
+    }
+    func disconnect() {
+        
     }
 }
