@@ -20,6 +20,7 @@ struct AIServer : Convenience {
     var serverChannelList:[AIChannel] //List of channels on the server
     var useSecureConnection:Bool //Is connection using secure port
     var serverState: stateType //State of server for the user
+    var session: NSURLSession //Session for Server
     
     var description: String{
         //Description for AIServer

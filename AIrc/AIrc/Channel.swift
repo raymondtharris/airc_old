@@ -28,6 +28,7 @@ protocol Convenience{
 struct AIChannel: Convenience {
     var name: String // Name of the channel
     var unreadCount:Int // Unread count of the channel
+    var connection:NSURLSession // Session for channel
     var channelState: stateType // State of the channel
     var mediaLibrary:[AIMedia] // Array of media found on the channel
     var autoReconnect:Bool //Recoonect to server automatically
