@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22081D531B5763DC00777AAD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22081D521B5763DC00777AAD /* Post.swift */; };
+		22081D551B58B02600777AAD /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22081D541B58B02600777AAD /* Favorite.swift */; };
 		221CA39E1B4CD93700679BF4 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CA39D1B4CD93700679BF4 /* Media.swift */; };
 		221CA3A01B52343100679BF4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221CA39F1B52343100679BF4 /* Settings.swift */; };
 		22B4E50D1B484A1E0042B477 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B4E50C1B484A1E0042B477 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		22081D521B5763DC00777AAD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		22081D541B58B02600777AAD /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		221CA39D1B4CD93700679BF4 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		221CA39F1B52343100679BF4 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		22B4E5091B484A1E0042B477 /* AIrc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIrc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 				22B4E53C1B48514F0042B477 /* Channel.swift */,
 				22B4E53E1B4858970042B477 /* User.swift */,
 				22081D521B5763DC00777AAD /* Post.swift */,
+				22081D541B58B02600777AAD /* Favorite.swift */,
 				221CA39D1B4CD93700679BF4 /* Media.swift */,
 			);
 			name = Objects;
@@ -289,6 +292,7 @@
 				221CA3A01B52343100679BF4 /* Settings.swift in Sources */,
 				221CA39E1B4CD93700679BF4 /* Media.swift in Sources */,
 				22B4E5421B486E6E0042B477 /* Client.swift in Sources */,
+				22081D551B58B02600777AAD /* Favorite.swift in Sources */,
 				22B4E53B1B484A740042B477 /* Server.swift in Sources */,
 				22081D531B5763DC00777AAD /* Post.swift in Sources */,
 				22B4E53F1B4858970042B477 /* User.swift in Sources */,

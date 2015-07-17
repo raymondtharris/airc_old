@@ -13,7 +13,7 @@ class AIClient: NSObject {
     var nickName: String //Nickname for client
     var settings: ClientStettings // client settings variable
     var connectedServers:[AIServer] // Array of conencted servers
-    
+    var favorites:[Favorite]
     override var description: String{ // description string
         return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
     }
@@ -22,18 +22,21 @@ class AIClient: NSObject {
         self.nickName = "Testing"
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
+        self.favorites = [Favorite]()
     }
     init(name:String, nickName:String) {
         self.name = name
         self.nickName = nickName
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
+        self.favorites = [Favorite]()
     }
     init(name:String, nickName:String, connectedServers: [AIServer]){
         self.name = name
         self.nickName = nickName
         self.connectedServers = connectedServers
         self.settings = ClientStettings()
+        self.favorites = [Favorite]()
     }
     func addServer(server:AIServer){
         self.connectedServers.append(server)
