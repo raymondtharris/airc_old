@@ -23,3 +23,18 @@ class ViewController: UIViewController {
 
 }
 
+class AIServerTableViewController: UITableViewController {
+    
+}
+
+class AIChannelTableViewController: UITableViewController {
+    
+}
+
+class AIServerConfigurationViewController: UIViewController {
+    
+}
+
+class AIChannelConfigurationnViewController: UIViewController {
+    
+}
