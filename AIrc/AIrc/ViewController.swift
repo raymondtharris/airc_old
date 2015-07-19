@@ -31,6 +31,10 @@ class AIChannelTableViewController: UITableViewController {
     
 }
 
+class AIChannelChatViewController: UIViewController {
+    
+}
+
 class AIServerConfigurationViewController: UIViewController {
     
 }

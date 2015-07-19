@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="upo-nG-RQI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
     </dependencies>
@@ -21,10 +21,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--New Server-->
+        <scene sceneID="XRs-bF-LI6">
+            <objects>
+                <viewController id="top-8x-06R" customClass="AIServerConfigurationViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a7z-f1-d2u"/>
+                        <viewControllerLayoutGuide type="bottom" id="u3S-JD-Adm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1vt-eY-DlE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Server" id="EkL-uc-RdI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUg-VR-V2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1210" y="450"/>
+        </scene>
         <!--Server List-->
         <scene sceneID="wtc-FO-Z3a">
             <objects>
-                <tableViewController id="iyf-Zz-IAz" sceneMemberID="viewController">
+                <tableViewController id="iyf-Zz-IAz" customClass="AIServerTableViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="VEz-9E-FxG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,10 +77,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Server List" id="JcQ-JR-4Av">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Aml-Eo-gii">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V5b-9w-opk">
-                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="V5b-9w-opk">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+"/>
+                                <connections>
+                                    <segue destination="top-8x-06R" kind="show" id="EKB-Bh-k5a"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -73,7 +94,7 @@
         <!--Channel List-->
         <scene sceneID="vko-Fh-IJ4">
             <objects>
-                <tableViewController title="Channel List" id="k11-dc-fUv" sceneMemberID="viewController">
+                <tableViewController title="Channel List" id="k11-dc-fUv" customClass="AIChannelTableViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZnN-8K-SwE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,10 +135,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Channel List" id="iGr-k5-aLk">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="49N-uo-P1F">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="W5u-Pw-NZu">
-                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="W5u-Pw-NZu">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+"/>
+                                <connections>
+                                    <segue destination="b1u-eb-gvb" kind="show" id="zfk-jk-oxX"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -126,10 +149,29 @@
             </objects>
             <point key="canvasLocation" x="1783" y="-269"/>
         </scene>
-        <!--View Controller-->
+        <!--New Channel-->
+        <scene sceneID="ASU-Vr-7eK">
+            <objects>
+                <viewController id="b1u-eb-gvb" customClass="AIChannelConfigurationViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7i9-Aj-Taa"/>
+                        <viewControllerLayoutGuide type="bottom" id="45p-UI-IRf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Twa-qZ-g6f">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Channel" id="SWS-RA-Sih"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9BS-xr-1xv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1891" y="450"/>
+        </scene>
+        <!--Title-->
         <scene sceneID="SW0-ED-87m">
             <objects>
-                <viewController id="Nvo-0t-0AB" sceneMemberID="viewController">
+                <viewController id="Nvo-0t-0AB" customClass="AIChannelChatViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HUJ-1d-oft"/>
                         <viewControllerLayoutGuide type="bottom" id="9PW-FM-KG4"/>
@@ -148,10 +190,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="atX-iq-zlu">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="6pt-Qr-PoB">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gDv-Dy-JSG">
+                                <rect key="frame" x="558" y="11" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsb-hm-wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2417" y="-21"/>
+            <point key="canvasLocation" x="2629" y="-94"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cp8-us-fhE">
