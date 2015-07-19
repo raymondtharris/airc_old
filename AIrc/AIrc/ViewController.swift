@@ -35,6 +35,6 @@ class AIServerConfigurationViewController: UIViewController {
     
 }
 
-class AIChannelConfigurationnViewController: UIViewController {
+class AIChannelConfigurationViewController: UIViewController {
     
 }
