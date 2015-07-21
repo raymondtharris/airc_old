@@ -24,21 +24,37 @@ class ViewController: UIViewController {
 }
 
 class AIServerTableViewController: UITableViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 class AIChannelTableViewController: UITableViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 class AIChannelChatViewController: UIViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 class AIServerConfigurationViewController: UIViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
 
 class AIChannelConfigurationViewController: UIViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+class AIChannelDetailViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

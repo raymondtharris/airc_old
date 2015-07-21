@@ -195,6 +195,9 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gDv-Dy-JSG">
                                 <rect key="frame" x="558" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="K8Y-YF-LHj" kind="show" id="eaq-TC-568"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -202,6 +205,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsb-hm-wk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2629" y="-94"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="jYV-e7-LQM">
+            <objects>
+                <viewController id="K8Y-YF-LHj" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fzK-NV-fX4"/>
+                        <viewControllerLayoutGuide type="bottom" id="5n0-hg-3ZB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q64-bk-a5y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c1H-On-XXx">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="iw9-Om-lrH"/>
+                                    <tabBarItem systemItem="more" id="m62-6w-KTE"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="iWZ-tc-3CB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ay3-Hu-bBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2735" y="587"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cp8-us-fhE">
