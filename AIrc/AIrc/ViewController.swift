@@ -47,9 +47,21 @@ class AIServerTableViewController: UITableViewController {
 }
 
 class AIChannelTableViewController: UITableViewController {
+    var testChannels = [("what", 3), ("who", 16), ("when", 10), ("testing", 4)]
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return testChannels.count
+    }
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("channelCell", forIndexPath: indexPath) as! AIChannelTableCellView
+        cell.nameLabel.text = testChannels[indexPath.row].0
+        cell.unreadCountLabel.text = testChannels[indexPath.row].1.description
+        return cell
+    }
+    
 }
 
 class AIChannelChatViewController: UIViewController {

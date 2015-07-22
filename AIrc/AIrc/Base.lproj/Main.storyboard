@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qVb-En-Em1" customClass="AIChannelTableCellView" customModule="AIrc" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="channelCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelCell" id="qVb-En-Em1" customClass="AIChannelTableCellView" customModule="AIrc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qVb-En-Em1" id="Pwc-GZ-mVA">
@@ -101,7 +101,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="nameLabel" destination="Pwc-GZ-mVA" id="H7P-nV-5ws"/>
+                                    <outlet property="nameLabel" destination="Rve-TC-gzh" id="kJo-ki-Kjf"/>
                                     <outlet property="unreadCountLabel" destination="DG6-zO-mVF" id="hSk-AV-HVN"/>
                                     <segue destination="Nvo-0t-0AB" kind="show" id="hqx-ZE-QLR"/>
                                 </connections>
