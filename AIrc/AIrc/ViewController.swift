@@ -24,8 +24,25 @@ class ViewController: UIViewController {
 }
 
 class AIServerTableViewController: UITableViewController {
+    var testVals = ["what", "who", "when"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return testVals.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
+        cell.nameLabel.text = testVals[indexPath.row]
+        return cell
     }
 }
 

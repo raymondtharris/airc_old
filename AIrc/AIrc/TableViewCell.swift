@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 class AIServerTableCellView: UITableViewCell {
-    @IBOutlet weak var nameLabel: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
     
 }
 
 class AIChannelTableCellView: UITableViewCell {
     @IBOutlet weak var unreadCountLabel: UILabel!
-    @IBOutlet weak var nameLabel: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
     
 }

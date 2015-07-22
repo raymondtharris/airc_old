@@ -4,23 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--New Server-->
         <scene sceneID="XRs-bF-LI6">
             <objects>
@@ -49,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sup-mb-tG7" customClass="AIServerTableCellView" customModule="AIrc" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="serverCell" id="sup-mb-tG7" customClass="AIServerTableCellView" customModule="AIrc" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sup-mb-tG7" id="bz3-H0-y5n">
@@ -65,7 +48,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="nameLabel" destination="bz3-H0-y5n" id="HKT-Fc-Gjb"/>
+                                    <outlet property="nameLabel" destination="kA1-U5-iT7" id="jDN-Sa-kVG"/>
                                     <segue destination="k11-dc-fUv" kind="show" id="KcB-yK-jpx"/>
                                 </connections>
                             </tableViewCell>
@@ -76,14 +59,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Server List" id="JcQ-JR-4Av">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Aml-Eo-gii">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="V5b-9w-opk">
-                                <rect key="frame" x="558" y="11" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <segue destination="top-8x-06R" kind="show" id="EKB-Bh-k5a"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="Aml-Eo-gii">
+                            <connections>
+                                <segue destination="top-8x-06R" kind="show" id="shC-Vu-ETe"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -134,14 +113,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Channel List" id="iGr-k5-aLk">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="49N-uo-P1F">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="W5u-Pw-NZu">
-                                <rect key="frame" x="558" y="11" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <segue destination="b1u-eb-gvb" kind="show" id="zfk-jk-oxX"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="49N-uo-P1F">
+                            <connections>
+                                <segue destination="b1u-eb-gvb" kind="show" id="Pzb-Tz-SRL"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -191,7 +166,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="atX-iq-zlu">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="6pt-Qr-PoB">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="6pt-Qr-PoB">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="gDv-Dy-JSG">
                                 <rect key="frame" x="558" y="11" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

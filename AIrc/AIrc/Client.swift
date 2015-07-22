@@ -43,7 +43,8 @@ class AIClient: NSObject {
     }
     func removeServer(server:AIServer){
         //removes a server
-        var index:Int
+        var index:Int = 0
+        print(index)
         for var i = 0; i < self.connectedServers.count; i++ {
             if connectedServers[i].name == server.name {
                 index = i
