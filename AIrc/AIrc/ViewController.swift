@@ -67,12 +67,31 @@ class AIChannelTableViewController: UITableViewController {
 class AIChannelChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        // check user settings to see if use same name is true
     }
 }
 
 class AIServerConfigurationViewController: UIViewController {
+    
+    @IBOutlet weak var serverAddressLabel: UILabel!
+    @IBOutlet weak var serverAddressTextField: UITextField!
+    
+    @IBOutlet weak var serverSecurePortSwitch: UISwitch!
+    
+    @IBOutlet weak var serverSameCredentialsSwitch: UISwitch!
+    
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var userNicknameLabel: UILabel!
+    @IBOutlet weak var userNicknameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    @IBAction func addServer(sender: AnyObject) {
+    }
+    @IBAction func toggleSameCredentials(sender: AnyObject) {
     }
 }
 
