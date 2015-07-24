@@ -69,6 +69,8 @@ class AIChannelChatViewController: UIViewController {
         super.viewDidLoad()
         // check user settings to see if use same name is true
     }
+    
+    
 }
 
 class AIServerConfigurationViewController: UIViewController {
@@ -96,8 +98,16 @@ class AIServerConfigurationViewController: UIViewController {
 }
 
 class AIChannelConfigurationViewController: UIViewController {
+    @IBOutlet weak var channelNameLabel: UILabel!
+    @IBOutlet weak var channelNameTextField: UITextField!
+    
+    @IBOutlet weak var channelAutoConnectLabel: UILabel!
+    @IBOutlet weak var channelAutoConnectSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    @IBAction func addChannel(sender: AnyObject) {
     }
 }
 
