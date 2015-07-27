@@ -103,7 +103,7 @@
         <!--Settings-->
         <scene sceneID="R6j-tH-25h">
             <objects>
-                <viewController id="l9K-0v-uy9" sceneMemberID="viewController">
+                <viewController id="l9K-0v-uy9" customClass="AIClientSettingsViewController" customModule="AIrc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Ns-2X-JrQ"/>
                         <viewControllerLayoutGuide type="bottom" id="SR7-ht-xX3"/>
@@ -194,8 +194,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="wy6-2T-tXm">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="V0H-2n-vcG"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="V0H-2n-vcG">
+                            <connections>
+                                <action selector="UpdateSettings:" destination="l9K-0v-uy9" id="Ktm-Ag-jAi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="SettingSameNameLabel" destination="W8c-Pi-mpM" id="hTi-El-XzS"/>
+                        <outlet property="SettingsDoneButton" destination="V0H-2n-vcG" id="HA6-T5-Udz"/>
+                        <outlet property="SettingsNameLabel" destination="LCj-3m-vuM" id="kTO-7j-WP3"/>
+                        <outlet property="SettingsNameTextField" destination="86e-8h-LcR" id="gtz-kx-RQi"/>
+                        <outlet property="SettingsNicknameLabel" destination="aoG-Hk-W3C" id="w6C-WH-Tj4"/>
+                        <outlet property="SettingsNicknameTextField" destination="243-H1-Dgw" id="7Cb-Th-q1W"/>
+                        <outlet property="SettingsReconnectChannelLabel" destination="YRG-k6-peo" id="t6G-Yx-JHG"/>
+                        <outlet property="SettingsReconnectChannelSwitch" destination="sVB-YO-dt7" id="9jh-4O-EQX"/>
+                        <outlet property="SettingsReconnectServerLabel" destination="Vb6-O4-pV0" id="zLa-3L-4kX"/>
+                        <outlet property="SettingsReconnectServerSwitch" destination="hkp-GV-pfr" id="3Mw-wq-6cF"/>
+                        <outlet property="SettingsSameNameSwitch" destination="Lak-bh-gzb" id="akZ-oF-5kh"/>
+                        <outlet property="SettingsSameNicknameLabel" destination="lJk-D1-yDc" id="a7s-xi-Y43"/>
+                        <outlet property="SettingsSameNicknameSwitch" destination="Igo-UX-55T" id="rQR-o2-Hoe"/>
+                        <outlet property="SettingsSaveDurationLabel" destination="u2O-1F-YKT" id="s48-cQ-rIe"/>
+                        <outlet property="SettingsSaveDurationTextField" destination="B1L-eX-Jqm" id="JVX-oP-Sz3"/>
+                        <outlet property="SettingsSaveMediaLabel" destination="VGl-sX-0Gq" id="gtU-yi-vRx"/>
+                        <outlet property="SettingsSaveMediaSwitch" destination="qmP-kc-JND" id="yhU-5Q-gaI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gds-Hi-0yZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

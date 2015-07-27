@@ -73,6 +73,36 @@ class AIChannelChatViewController: UIViewController {
     
 }
 
+class AIClientSettingsViewController: UIViewController {
+    @IBOutlet weak var SettingsNameLabel: UILabel!
+    @IBOutlet weak var SettingsNameTextField: UITextField!
+    @IBOutlet weak var SettingsNicknameLabel: UILabel!
+    @IBOutlet weak var SettingsNicknameTextField: UITextField!
+    
+    @IBOutlet weak var SettingSameNameLabel: UILabel!
+    @IBOutlet weak var SettingsSameNameSwitch: UISwitch!
+    @IBOutlet weak var SettingsSameNicknameLabel: UILabel!
+    @IBOutlet weak var SettingsSameNicknameSwitch: UISwitch!
+    
+    @IBOutlet weak var SettingsSaveMediaLabel: UILabel!
+    @IBOutlet weak var SettingsSaveMediaSwitch: UISwitch!
+    @IBOutlet weak var SettingsSaveDurationLabel: UILabel!
+    @IBOutlet weak var SettingsSaveDurationTextField: UITextField!
+    
+    @IBOutlet weak var SettingsReconnectServerLabel: UILabel!
+    @IBOutlet weak var SettingsReconnectServerSwitch: UISwitch!
+    @IBOutlet weak var SettingsReconnectChannelLabel: UILabel!
+    @IBOutlet weak var SettingsReconnectChannelSwitch: UISwitch!
+    
+    @IBOutlet weak var SettingsDoneButton: UIBarButtonItem!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    @IBAction func UpdateSettings(sender: AnyObject) {
+    }
+}
+
 class AIServerConfigurationViewController: UIViewController {
     
     @IBOutlet weak var serverAddressLabel: UILabel!
