@@ -48,7 +48,7 @@ class AIServerTableViewController: UITableViewController {
     }
     
     func tempConnection(){
-        let url = NSURL(string: "http://45.55.192.173:4000/blog_info")!
+        let url = NSURL(string: "http://localhost:4000/blog_info")!
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url){ (data, response, error) in
             dispatch_async(dispatch_get_main_queue(), {
