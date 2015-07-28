@@ -28,6 +28,8 @@ class AIServerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tempConnection()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +45,29 @@ class AIServerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
         cell.nameLabel.text = testVals[indexPath.row]
         return cell
+    }
+    
+    func tempConnection(){
+        let url = NSURL(string: "http://45.55.192.173:4000/blog_info")!
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url){ (data, response, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.getData(data!)
+            })
+        }
+        task?.resume()
+        
+    }
+    func getData(data:NSData){
+        var error: NSError?
+        let jsonObj: AnyObject?
+        do{
+            try jsonObj = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+            print(jsonObj)
+        }catch{
+            print(error)
+        }
+        
     }
 }
 
