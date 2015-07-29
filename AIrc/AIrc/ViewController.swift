@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 class AIServerTableViewController: UITableViewController {
     var testVals = ["what", "who", "when"]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tempConnection()
@@ -53,6 +54,8 @@ class AIServerTableViewController: UITableViewController {
         let task = NSURLSession.sharedSession().dataTaskWithURL(url){ (data, response, error) in
             dispatch_async(dispatch_get_main_queue(), {
                 self.getData(data!)
+                let tView = self.view as! UITableView
+                tView.reloadData()
             })
         }
         task?.resume()
@@ -60,10 +63,16 @@ class AIServerTableViewController: UITableViewController {
     }
     func getData(data:NSData){
         var error: NSError?
-        let jsonObj: AnyObject?
+        var jsonObj: AnyObject?
+        
         do{
-            try jsonObj = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-            print(jsonObj)
+            
+            try jsonObj = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+            print(jsonObj?.objectForKey("Name")!)
+            self.testVals.append((jsonObj?.objectForKey("Name"))! as! String)
+            
+            
         }catch{
             print(error)
         }
