@@ -50,8 +50,8 @@ class AIServerTableViewController: UITableViewController {
     
     func tempConnection(){
         let url = NSURL(string: "http://localhost:4000/blog_info")!
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url){ (data, response, error) in
+        let url2 = NSURL(string: "http://chat.freenode.net:6667")!
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url2){ (data, response, error) in
             dispatch_async(dispatch_get_main_queue(), {
                 self.getData(data!)
                 let tView = self.view as! UITableView
@@ -62,21 +62,24 @@ class AIServerTableViewController: UITableViewController {
         
     }
     func getData(data:NSData){
-        var error: NSError?
-        var jsonObj: AnyObject?
-        
+        //var error: NSError?
+        //var jsonObj: AnyObject?
+        var str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        print(str)
+        //print(data)
+        /*
         do{
             
             try jsonObj = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
             
-            print(jsonObj?.objectForKey("Name")!)
-            self.testVals.append((jsonObj?.objectForKey("Name"))! as! String)
+            print(jsonObj)
+            //self.testVals.append((jsonObj?.objectForKey("Name"))! as! String)
             
             
         }catch{
             print(error)
         }
-        
+        */
     }
 }
 
