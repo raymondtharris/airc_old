@@ -161,7 +161,9 @@ class AIServerConfigurationViewController: UIViewController {
     }
     @IBAction func addServer(sender: AnyObject) {
         // Making a server work
-        var newServer = AIServer({"Temp"})
+        let newServer = AIServer()
+        print(newServer)
+        // TestConnection
         
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {

@@ -15,4 +15,8 @@ struct AIUser {
     var description: String{ //description for user
         return "\(name) \(nickname)"
     }
+    init(){
+        name = "User1"
+        nickname = "NickUser1"
+    }
 }

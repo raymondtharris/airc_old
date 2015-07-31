@@ -26,6 +26,18 @@ struct AIServer : Convenience {
         //Description for AIServer
         return "\(name) \(port) \(address)"
     }
+    init(){
+        name = "Temp"
+        port = SECURE_PORT
+        address = "http://chat.freenode.net"
+        connectedChannels = [AIChannel]()
+        user = AIUser()
+        serverChannelList = [AIChannel]()
+        useSecureConnection = false
+        serverState = stateType.Unconnected
+        session = NSURLSession.sharedSession()
+    }
+    
     
     mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
