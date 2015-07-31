@@ -54,6 +54,7 @@ class AIServerTableViewController: UITableViewController {
         let task = NSURLSession.sharedSession().dataTaskWithURL(url2){ (data, response, error) in
             dispatch_async(dispatch_get_main_queue(), {
                 self.getData(data!)
+                print(response?.description)
                 let tView = self.view as! UITableView
                 tView.reloadData()
             })
@@ -159,6 +160,9 @@ class AIServerConfigurationViewController: UIViewController {
         super.viewDidLoad()
     }
     @IBAction func addServer(sender: AnyObject) {
+        // Making a server work
+        var newServer = AIServer({"Temp"})
+        
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {
     }
