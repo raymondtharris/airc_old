@@ -19,4 +19,18 @@ struct AIUser {
         name = "User1"
         nickname = "NickUser1"
     }
+    init(name:String, nickname:String){
+        self.name = name
+        self.nickname = nickname
+    }
+    init(name:String){
+        self.name = name
+        self.nickname = name
+    }
+    mutating func setName(name: String){
+        self.name = name
+    }
+    mutating func setNickname(nickname: String){
+        self.nickname = nickname
+    }
 }
