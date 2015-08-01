@@ -65,4 +65,7 @@ class AIClient: NSObject {
         addServer(server)
         return false
     }
+    func loadUser(){
+        
+    }
 }

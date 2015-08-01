@@ -11,6 +11,13 @@ import Foundation
 let UNSECURE_PORT = 6667
 let SECURE_PORT = 6697
 
+
+protocol Convenience{
+    mutating func connect()
+    mutating func disconnect()
+}
+
+
 struct AIServer : Convenience {
     var name:String //Name of the server
     var port:Int //Port number used to connect to server
@@ -38,6 +45,17 @@ struct AIServer : Convenience {
         session = NSURLSession.sharedSession()
     }
     
+    init(name: String, port: Int, address: String, user: AIUser, useSecureConnection: Bool){
+        self.name = name
+        self.port = port
+        self.address = address
+        self.connectedChannels = [AIChannel]()
+        self.user = user
+        self.serverChannelList = [AIChannel]()
+        self.useSecureConnection = useSecureConnection
+        self.serverState = stateType.Unconnected
+        self.session = NSURLSession.sharedSession()
+    }
     
     mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
@@ -74,10 +92,10 @@ struct AIServer : Convenience {
         
     }
     
-    func connect() {
+    mutating func connect() {
         
     }
-    func disconnect() {
+    mutating func disconnect() {
         
     }
 }

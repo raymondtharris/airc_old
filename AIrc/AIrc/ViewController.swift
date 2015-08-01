@@ -23,12 +23,17 @@ class ViewController: UIViewController {
 
 }
 
+let AddingServerNotification:String = "AddingServerNotification"
+
 class AIServerTableViewController: UITableViewController {
     var testVals = ["what", "who", "when"]
-    
+    var userClient:AIClient = AIClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userClient.loadUser()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
+        
         tempConnection()
         
     }
@@ -81,6 +86,11 @@ class AIServerTableViewController: UITableViewController {
             print(error)
         }
         */
+    }
+    
+    func addingNewServer(notification: NSNotification){
+        let dataDictionary = notification.userInfo!
+        print(dataDictionary)
     }
 }
 
@@ -164,6 +174,7 @@ class AIServerConfigurationViewController: UIViewController {
         let newServer = AIServer()
         print(newServer)
         // TestConnection
+        NSNotificationCenter.defaultCenter().postNotificationName(AddingServerNotification, object: nil) //Need to send Object data with notificaiton post
         
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {

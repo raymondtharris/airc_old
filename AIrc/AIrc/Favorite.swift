@@ -14,5 +14,12 @@ struct Favorite {
     var desciption:String{
         return "\(dateFavorited):  \(post.description)"
     }
-    
+    init(post:AIPost){
+        self.post = post
+        self.dateFavorited = NSDate()
+    }
+    init(post:AIPost, dateFavorited:NSDate){
+        self.post = post
+        self.dateFavorited = dateFavorited
+    }
 }

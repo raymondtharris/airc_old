@@ -11,21 +11,22 @@ import Foundation
 enum stateType : CustomStringConvertible{
     case Connected //connected state
     case Unconnected // unconnected state
+    case Disconnected // disconnected state
+    case Reconnecting // reconnecting state
+    case Connecting // connecting state
     var description:String{ // description variable
         switch self{
         case .Connected: return "Connected";
         case .Unconnected: return "Unconnected";
+        case .Disconnected: return "Disconnected";
+        case .Reconnecting: return "Reconnecting";
+        case .Connecting: return "Connecting";
         }
     }
 }
 
-protocol Convenience{
-    func connect()
-    func disconnect()
-}
 
-
-struct AIChannel: Convenience {
+struct AIChannel {
     var name: String // Name of the channel
     var unreadCount:Int // Unread count of the channel
     var connection:NSURLSession // Session for channel
@@ -35,14 +36,30 @@ struct AIChannel: Convenience {
     var description: String{ // Description of the channel
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }
-    mutating func changeName(name: String){ // Changes the name of the channel
+    init(name:String){
         self.name = name
+        self.unreadCount = 0
+        self.connection = NSURLSession.sharedSession()
+        self.channelState = stateType.Unconnected
+        self.mediaLibrary = [AIMedia]()
+        self.autoReconnect = false
+    }
+    init(name:String, unreadCount: Int, channelState:stateType, autoReconnect: Bool){
+        self.name = name
+        self.unreadCount = unreadCount
+        self.connection = NSURLSession.sharedSession()
+        self.channelState = channelState
+        self.mediaLibrary = [AIMedia]()
+        self.autoReconnect = autoReconnect
     }
     
-    func connect() {
-        
+    mutating func setName(name: String){ // Changes the name of the channel
+        self.name = name
     }
-    func disconnect() {
-        
+    mutating func setUnreadCount(unreadCount: Int){
+        self.unreadCount = unreadCount
+    }
+    mutating func setAutoReconnect(autoReconnect: Bool){
+        self.autoReconnect = autoReconnect
     }
 }

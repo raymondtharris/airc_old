@@ -31,4 +31,28 @@ struct AIMedia{
     var description:String{ // description variable
         return "\(name) \(typeOfMedia)"
     }
+    init(name:String, typeOfMedia: mediaType, filesize: Int){
+        self.name = name
+        self.typeOfMedia = typeOfMedia
+        self.filesize = filesize
+        self.dateAdded = NSDate()
+    }
+    init(name:String, typeOfMedia: mediaType, filesize: Int, dateAdded: NSDate){
+        self.name = name
+        self.typeOfMedia = typeOfMedia
+        self.filesize = filesize
+        self.dateAdded = dateAdded
+    }
+    mutating func setName(name: String){
+        self.name = name
+    }
+    mutating func setTypeOfMedia(typeOfMedia:mediaType){
+        self.typeOfMedia = typeOfMedia
+    }
+    mutating func setFilesize(filesize:Int){
+        self.filesize = filesize
+    }
+    mutating func setDateAdded(dateAdded: NSDate){
+        self.dateAdded = dateAdded
+    }
 }
