@@ -44,17 +44,17 @@ class AIServerTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testVals.count
+        return self.userClient.connectedServers.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
-        cell.nameLabel.text = testVals[indexPath.row]
+        cell.nameLabel.text = self.userClient.connectedServers[indexPath.row].address
         return cell
     }
     
     func tempConnection(){
-        let url = NSURL(string: "http://localhost:4000/blog_info")!
+       // let url = NSURL(string: "http://localhost:4000/blog_info")!
         let url2 = NSURL(string: "http://chat.freenode.net:6667")!
         let task = NSURLSession.sharedSession().dataTaskWithURL(url2){ (data, response, error) in
             dispatch_async(dispatch_get_main_queue(), {
@@ -89,8 +89,12 @@ class AIServerTableViewController: UITableViewController {
     }
     
     func addingNewServer(notification: NSNotification){
-        let dataDictionary = notification.userInfo!
+        let dataDictionary:Dictionary = notification.userInfo!
         print(dataDictionary)
+        let serverToAdd:AIServer = AIServer(name: dataDictionary["address"] as! String, address: dataDictionary["address"] as! String, user: AIUser(name: dataDictionary["user"] as! String, nickname: dataDictionary["nickname"] as! String), useSecureConnection: dataDictionary["secure"] as! Bool)
+        self.userClient.connectedServers.append(serverToAdd)
+        var tableView = self.view as! UITableView
+        tableView.reloadData()
     }
 }
 
@@ -171,10 +175,23 @@ class AIServerConfigurationViewController: UIViewController {
     }
     @IBAction func addServer(sender: AnyObject) {
         // Making a server work
-        let newServer = AIServer()
+        var newServer = AIServer(name: self.serverAddressTextField.text!, address: self.serverAddressTextField.text!, user: AIUser(), useSecureConnection: self.serverSecurePortSwitch.on)
+        if self.serverSameCredentialsSwitch.on{
+            // Get Client name and nickname
+        } else{
+            newServer.user.name = self.userNameTextField.text!
+            newServer.user.nickname =  self.userNicknameTextField.text!
+        }
         print(newServer)
         // TestConnection
-        NSNotificationCenter.defaultCenter().postNotificationName(AddingServerNotification, object: nil) //Need to send Object data with notificaiton post
+        
+        // if connection works send it to be added to the array
+        let dataDictionary:NSDictionary = ["address": newServer.address, "user": newServer.user.name, "nickname": newServer.user.nickname, "secure": newServer.useSecureConnection]
+        //let temp = userInfoObject(data: newServer)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(AddingServerNotification, object: self, userInfo: dataDictionary as [NSObject : AnyObject])
+        //postNotificationName("AddingServerNotification", object: self, userInfo: dataDictionary) //Need to send Object data with notificaiton post
+        
         
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {

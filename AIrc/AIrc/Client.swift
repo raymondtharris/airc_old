@@ -69,3 +69,14 @@ class AIClient: NSObject {
         
     }
 }
+
+
+class userInfoObject<T> {
+    var data: T
+    init(data: T){
+        self.data = data
+    }
+    var description: String{
+        return "\(data)"
+    }
+}

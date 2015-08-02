@@ -57,6 +57,22 @@ struct AIServer : Convenience {
         self.session = NSURLSession.sharedSession()
     }
     
+    init(name: String, address: String, user: AIUser, useSecureConnection: Bool){
+        self.name = name
+        if useSecureConnection{
+            self.port = SECURE_PORT
+        }else{
+            self.port = UNSECURE_PORT
+        }
+        self.address = address
+        self.connectedChannels = [AIChannel]()
+        self.user = user
+        self.serverChannelList = [AIChannel]()
+        self.useSecureConnection = useSecureConnection
+        self.serverState = stateType.Unconnected
+        self.session = NSURLSession.sharedSession()
+    }
+    
     mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
     }
