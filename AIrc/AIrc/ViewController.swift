@@ -59,8 +59,14 @@ class AIServerTableViewController: UITableViewController {
         if segue.identifier == "showChannelViewController" {
             let tView = self.view as! UITableView
             let indexPath = tView.indexPathForSelectedRow
-            let vcon = segue.destinationViewController as! UITableViewController
+            let vcon = segue.destinationViewController as! AIChannelTableViewController
             vcon.title =  userClient.connectedServers[(indexPath?.row)!].name
+            vcon.connectedChannels = [AIChannel]()
+            vcon.connectedChannels.append(AIChannel(name: "#Gaming", unreadCount: 22, channelState: stateType.Connected, autoReconnect: true))
+            vcon.connectedChannels.append(AIChannel(name: "#Gaming2", unreadCount: 12, channelState: stateType.Connected, autoReconnect: true))
+            vcon.connectedChannels.append(AIChannel(name: "#Gaming3", unreadCount: 4, channelState: stateType.Connected, autoReconnect: true))
+            vcon.connectedChannels.append(AIChannel(name: "#Gaming4", unreadCount: 1, channelState: stateType.Connected, autoReconnect: true))
+            vcon.connectedChannels.append(AIChannel(name: "#Gaming5", unreadCount: 6, channelState: stateType.Connected, autoReconnect: true))
         }
     }
     
@@ -111,17 +117,19 @@ class AIServerTableViewController: UITableViewController {
 
 class AIChannelTableViewController: UITableViewController {
     var testChannels = [("what", 3), ("who", 16), ("when", 10), ("testing", 4)]
+    var connectedChannels = [AIChannel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testChannels.count
+        return connectedChannels.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("channelCell", forIndexPath: indexPath) as! AIChannelTableCellView
-        cell.nameLabel.text = testChannels[indexPath.row].0
-        cell.unreadCountLabel.text = testChannels[indexPath.row].1.description
+        cell.nameLabel.text = connectedChannels[indexPath.row].name
+        cell.unreadCountLabel.text = connectedChannels[indexPath.row].unreadCount.description
         return cell
     }
     
