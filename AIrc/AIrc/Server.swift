@@ -100,7 +100,7 @@ struct AIServer : Convenience {
             //display and store the data from connecting to the IRC server
             
         }
-        task?.resume()
+        task.resume()
         addChannel(channel)
     }
     

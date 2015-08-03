@@ -61,7 +61,7 @@ class AIClient: NSObject {
             (data: NSData?, response: NSURLResponse?, error: NSError?) in
             //display and store the data from connecting to the IRC server
         }
-        task?.resume()
+        task.resume()
         addServer(server)
         return false
     }

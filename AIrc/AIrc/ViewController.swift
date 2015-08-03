@@ -50,7 +50,18 @@ class AIServerTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
         cell.nameLabel.text = self.userClient.connectedServers[indexPath.row].address
+        
         return cell
+    }
+    
+  
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showChannelViewController" {
+            let tView = self.view as! UITableView
+            let indexPath = tView.indexPathForSelectedRow
+            let vcon = segue.destinationViewController as! UITableViewController
+            vcon.title =  userClient.connectedServers[(indexPath?.row)!].name
+        }
     }
     
     func tempConnection(){
@@ -64,7 +75,7 @@ class AIServerTableViewController: UITableViewController {
                 tView.reloadData()
             })
         }
-        task?.resume()
+        task.resume()
         
     }
     func getData(data:NSData){
