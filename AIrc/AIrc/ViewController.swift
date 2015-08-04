@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 }
 
 let AddingServerNotification:String = "AddingServerNotification"
+let AddingChannelNotification:String = "AddingChannelNotification"
 
 class AIServerTableViewController: UITableViewController {
     var testVals = ["what", "who", "when"]
@@ -58,15 +59,12 @@ class AIServerTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChannelViewController" {
             let tView = self.view as! UITableView
-            let indexPath = tView.indexPathForSelectedRow
+            let indexPath:NSIndexPath = tView.indexPathForSelectedRow!
             let vcon = segue.destinationViewController as! AIChannelTableViewController
-            vcon.title =  userClient.connectedServers[(indexPath?.row)!].name
-            vcon.connectedChannels = [AIChannel]()
-            vcon.connectedChannels.append(AIChannel(name: "#Gaming", unreadCount: 22, channelState: stateType.Connected, autoReconnect: true))
-            vcon.connectedChannels.append(AIChannel(name: "#Gaming2", unreadCount: 12, channelState: stateType.Connected, autoReconnect: true))
-            vcon.connectedChannels.append(AIChannel(name: "#Gaming3", unreadCount: 4, channelState: stateType.Connected, autoReconnect: true))
-            vcon.connectedChannels.append(AIChannel(name: "#Gaming4", unreadCount: 1, channelState: stateType.Connected, autoReconnect: true))
-            vcon.connectedChannels.append(AIChannel(name: "#Gaming5", unreadCount: 6, channelState: stateType.Connected, autoReconnect: true))
+            let serverToUse = userClient.connectedServers[indexPath.row]
+            vcon.title =  serverToUse.name
+            vcon.connectedChannels = serverToUse.connectedChannels
+            
         }
     }
     
@@ -110,7 +108,7 @@ class AIServerTableViewController: UITableViewController {
         print(dataDictionary)
         let serverToAdd:AIServer = AIServer(name: dataDictionary["address"] as! String, address: dataDictionary["address"] as! String, user: AIUser(name: dataDictionary["user"] as! String, nickname: dataDictionary["nickname"] as! String), useSecureConnection: dataDictionary["secure"] as! Bool)
         self.userClient.connectedServers.append(serverToAdd)
-        var tableView = self.view as! UITableView
+        let tableView = self.view as! UITableView
         tableView.reloadData()
     }
 }
@@ -118,9 +116,12 @@ class AIServerTableViewController: UITableViewController {
 class AIChannelTableViewController: UITableViewController {
     var testChannels = [("what", 3), ("who", 16), ("when", 10), ("testing", 4)]
     var connectedChannels = [AIChannel]()
+    var server = AIServer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewChannel:", name: AddingChannelNotification, object: nil)
+
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,6 +133,14 @@ class AIChannelTableViewController: UITableViewController {
         cell.unreadCountLabel.text = connectedChannels[indexPath.row].unreadCount.description
         return cell
     }
+    func addingNewChannel(notification:NSNotification){
+        let dataDictionary:Dictionary = notification.userInfo!
+        print(dataDictionary)
+        let channelToAdd = AIChannel(name: dataDictionary["name"] as! String, unreadCount: 0, channelState: stateType.Connecting, autoReconnect: dataDictionary["auto"] as! Bool)
+        self.connectedChannels.append(channelToAdd)
+        let tableView = self.view as! UITableView
+        tableView.reloadData()
+    }
     
 }
 
@@ -141,6 +150,7 @@ class AIChannelChatViewController: UIViewController {
         // check user settings to see if use same name is true
     }
     
+
     
 }
 
@@ -228,6 +238,13 @@ class AIChannelConfigurationViewController: UIViewController {
         super.viewDidLoad()
     }
     @IBAction func addChannel(sender: AnyObject) {
+        let newChannel = AIChannel(name: self.channelNameTextField.text!, unreadCount: 0, channelState: stateType.Unconnected, autoReconnect: self.channelAutoConnectSwitch.on)
+        print(newChannel)
+        let dataDictionary = ["name": newChannel.name, "auto": newChannel.autoReconnect]
+        NSNotificationCenter.defaultCenter().postNotificationName(AddingChannelNotification, object: self, userInfo: dataDictionary as [NSObject: AnyObject])
+        
+        // Redirect to channelTableView
+        
     }
 }
 
