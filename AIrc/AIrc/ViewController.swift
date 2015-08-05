@@ -201,6 +201,7 @@ class AIServerConfigurationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toggleSameCredentials(self)
     }
     @IBAction func addServer(sender: AnyObject) {
         // Making a server work
@@ -218,12 +219,30 @@ class AIServerConfigurationViewController: UIViewController {
         let dataDictionary:NSDictionary = ["address": newServer.address, "user": newServer.user.name, "nickname": newServer.user.nickname, "secure": newServer.useSecureConnection]
         //let temp = userInfoObject(data: newServer)
         
+        
+        
         NSNotificationCenter.defaultCenter().postNotificationName(AddingServerNotification, object: self, userInfo: dataDictionary as [NSObject : AnyObject])
         //postNotificationName("AddingServerNotification", object: self, userInfo: dataDictionary) //Need to send Object data with notificaiton post
         
+        //Return to other viewcontroller
+        self.navigationController?.popViewControllerAnimated(true)
         
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {
+        print(sender)
+        if self.serverSameCredentialsSwitch.on{
+            //hide the labels and textfields
+            self.userNameLabel.hidden = true
+            self.userNameTextField.hidden = true
+            self.userNicknameLabel.hidden = true
+            self.userNicknameTextField.hidden = true
+        } else{
+            //unhide the labels and textfields
+            self.userNameLabel.hidden = false
+            self.userNameTextField.hidden = false
+            self.userNicknameLabel.hidden = false
+            self.userNicknameTextField.hidden = false
+        }
     }
 }
 
@@ -244,6 +263,7 @@ class AIChannelConfigurationViewController: UIViewController {
         NSNotificationCenter.defaultCenter().postNotificationName(AddingChannelNotification, object: self, userInfo: dataDictionary as [NSObject: AnyObject])
         
         // Redirect to channelTableView
+        self.navigationController?.popViewControllerAnimated(true)
         
     }
 }
