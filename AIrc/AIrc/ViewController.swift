@@ -27,7 +27,6 @@ let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 
 class AIServerTableViewController: UITableViewController {
-    var testVals = ["what", "who", "when"]
     var userClient:AIClient = AIClient()
     
     override func viewDidLoad() {
@@ -66,6 +65,14 @@ class AIServerTableViewController: UITableViewController {
             vcon.connectedChannels = serverToUse.connectedChannels
             
         }
+        if segue.identifier == "showClientViewController" {
+            
+            var vcon = segue.destinationViewController as! AIClientSettingsViewController
+            vcon.clientData = userClient
+            vcon.SettingsNameTextField.text = userClient.name
+            vcon.SettingsNicknameTextField.text = userClient.nickName
+        }
+        
     }
     
     func tempConnection(){
@@ -141,6 +148,16 @@ class AIChannelTableViewController: UITableViewController {
         let tableView = self.view as! UITableView
         tableView.reloadData()
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showChannelSegue" {
+            let tView = self.view as! UITableView
+            let indexPath:NSIndexPath = tView.indexPathForSelectedRow!
+            let vcon = segue.destinationViewController as! AIChannelTableViewController
+            let channelToUse = connectedChannels[indexPath.row]
+            vcon.title =  channelToUse.name
+            
+        }
+    }
     
 }
 
@@ -177,10 +194,17 @@ class AIClientSettingsViewController: UIViewController {
     
     @IBOutlet weak var SettingsDoneButton: UIBarButtonItem!
     
+    var clientData = AIClient()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     @IBAction func UpdateSettings(sender: AnyObject) {
+        
+        
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
@@ -269,6 +293,8 @@ class AIChannelConfigurationViewController: UIViewController {
 }
 
 class AIChannelDetailViewController: UIViewController {
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
