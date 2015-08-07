@@ -25,6 +25,7 @@ class ViewController: UIViewController {
 
 let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
+let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
 
 class AIServerTableViewController: UITableViewController {
     var userClient:AIClient = AIClient()
@@ -33,7 +34,7 @@ class AIServerTableViewController: UITableViewController {
         super.viewDidLoad()
         userClient.loadUser()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingClientSettings:", name: UpdatingClientSettingsNotification, object: nil)
         tempConnection()
         
     }
@@ -71,6 +72,15 @@ class AIServerTableViewController: UITableViewController {
             vcon.clientData = userClient
             vcon.SettingsNameTextField.text = userClient.name
             vcon.SettingsNicknameTextField.text = userClient.nickName
+            
+            vcon.SettingsSameNameSwitch.on = userClient.settings.useSameName.boolValue
+            vcon.SettingsSameNicknameSwitch.on = userClient.settings.useSameNickname.boolValue
+            
+            vcon.SettingsReconnectChannelSwitch.on = userClient.settings.reconnectToChannelsOnOpen.boolValue
+            vcon.SettingsReconnectServerSwitch.on = userClient.settings.reconnectToServersOnOpen.boolValue
+            
+            vcon.SettingsSaveMediaSwitch.on = userClient.settings.useSaveMediaLength.boolValue
+            vcon.SettingsSaveDurationTextField.text = userClient.settings.saveMediaLength.description
         }
         
     }
@@ -117,6 +127,9 @@ class AIServerTableViewController: UITableViewController {
         self.userClient.connectedServers.append(serverToAdd)
         let tableView = self.view as! UITableView
         tableView.reloadData()
+    }
+    func updatingClientSettings(notification:NSNotification){
+        
     }
 }
 
