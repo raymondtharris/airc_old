@@ -35,7 +35,7 @@ class AIServerTableViewController: UITableViewController {
         userClient.loadUser()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingClientSettings:", name: UpdatingClientSettingsNotification, object: nil)
-        tempConnection()
+        //tempConnection()
         
     }
     
@@ -130,6 +130,10 @@ class AIServerTableViewController: UITableViewController {
         tableView.reloadData()
     }
     func updatingClientSettings(notification:NSNotification){
+        let dataDictionary:Dictionary = notification.userInfo!
+        print(dataDictionary)
+        
+        self.userClient.settings = dataDictionary["data"]!.clientData.settings as ClientStettings
         
     }
 }
@@ -215,14 +219,30 @@ class AIClientSettingsViewController: UIViewController {
         super.viewDidLoad()
     }
     @IBAction func UpdateSettings(sender: AnyObject) {
-        if self.clientData.settings.useSameNickname.boolValue != self.SettingsSameNicknameSwitch.on {
+        if self.clientData.settings.useSameNickname != self.SettingsSameNicknameSwitch.on {
             self.clientData.settings.useSameNickname = self.SettingsSameNicknameSwitch.on
+        }
+        if self.clientData.settings.useSameName != self.SettingsSameNameSwitch.on {
+            self.clientData.settings.useSameName = self.SettingsSameNameSwitch.on
         }
         if self.clientData.settings.name != self.SettingsNameTextField.text {
             self.clientData.settings.name = self.SettingsNameTextField.text!
         }
         if self.clientData.settings.nickName != self.SettingsNicknameTextField.text {
             self.clientData.settings.nickName = self.SettingsNicknameTextField.text!
+        }
+        if self.clientData.settings.useSaveMediaLength != self.SettingsSaveMediaSwitch.on {
+            self.clientData.settings.useSaveMediaLength = self.SettingsSaveMediaSwitch.on
+        }
+        let temp = Int(self.SettingsSaveDurationTextField.text!)
+        if self.clientData.settings.saveMediaLength != temp {
+            self.clientData.settings.saveMediaLength = temp!
+        }
+        if self.clientData.settings.reconnectToServersOnOpen != self.SettingsReconnectServerSwitch.on {
+            self.clientData.settings.reconnectToServersOnOpen = self.SettingsReconnectServerSwitch.on
+        }
+        if self.clientData.settings.reconnectToChannelsOnOpen != self.SettingsReconnectChannelSwitch.on {
+            self.clientData.settings.reconnectToChannelsOnOpen = self.SettingsReconnectChannelSwitch.on
         }
         
         let dataDictionay:Dictionary = ["data": self.clientData]
