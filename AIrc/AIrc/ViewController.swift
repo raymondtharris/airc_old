@@ -68,7 +68,7 @@ class AIServerTableViewController: UITableViewController {
         }
         if segue.identifier == "showClientViewController" {
             
-            var vcon = segue.destinationViewController as! AIClientSettingsViewController
+            let vcon = segue.destinationViewController as! AIClientSettingsViewController
             vcon.clientData = userClient
             vcon.SettingsNameTextField.text = userClient.name
             vcon.SettingsNicknameTextField.text = userClient.nickName
@@ -99,10 +99,11 @@ class AIServerTableViewController: UITableViewController {
         task.resume()
         
     }
+    
     func getData(data:NSData){
         //var error: NSError?
         //var jsonObj: AnyObject?
-        var str = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        let str = NSString(data: data, encoding: NSUTF8StringEncoding)!
         print(str)
         //print(data)
         /*
@@ -214,7 +215,19 @@ class AIClientSettingsViewController: UIViewController {
         super.viewDidLoad()
     }
     @IBAction func UpdateSettings(sender: AnyObject) {
+        if self.clientData.settings.useSameNickname.boolValue != self.SettingsSameNicknameSwitch.on {
+            self.clientData.settings.useSameNickname = self.SettingsSameNicknameSwitch.on
+        }
+        if self.clientData.settings.name != self.SettingsNameTextField.text {
+            self.clientData.settings.name = self.SettingsNameTextField.text!
+        }
+        if self.clientData.settings.nickName != self.SettingsNicknameTextField.text {
+            self.clientData.settings.nickName = self.SettingsNicknameTextField.text!
+        }
         
+        let dataDictionay:Dictionary = ["data": self.clientData]
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(UpdatingClientSettingsNotification, object: self, userInfo: dataDictionay as [NSObject: AnyObject])
         
         
         self.navigationController?.popViewControllerAnimated(true)
