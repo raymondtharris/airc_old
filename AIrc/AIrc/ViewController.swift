@@ -285,6 +285,8 @@ class AIServerConfigurationViewController: UIViewController {
         print(newServer)
         // TestConnection
         
+        newServer.connect()
+        
         // if connection works send it to be added to the array
         let dataDictionary:NSDictionary = ["address": newServer.address, "user": newServer.user.name, "nickname": newServer.user.nickname, "secure": newServer.useSecureConnection]
         //let temp = userInfoObject(data: newServer)

@@ -35,7 +35,7 @@ struct AIServer : Convenience {
     }
     init(){
         name = "Temp"
-        port = SECURE_PORT
+        port = UNSECURE_PORT
         address = "http://chat.freenode.net"
         connectedChannels = [AIChannel]()
         user = AIUser()
@@ -109,9 +109,31 @@ struct AIServer : Convenience {
     }
     
     mutating func connect() {
+        var url:NSURL
+        if self.port == SECURE_PORT {
+            url = NSURL(string: "https://" + self.address + ":" + self.port.description)!
+        } else {
+            url = NSURL(string: "http://" + self.address + ":" + self.port.description)!
+        }
+        self.session = NSURLSession.sharedSession()
+        let connectTask = self.session.dataTaskWithURL(url, completionHandler: { (data, response, error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.serverState = stateType.Connecting
+                let str = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+                print(str)
+                print(response?.description)
+                
+                self.serverState = stateType.Connected
+            })
+        
+        })
+        connectTask.resume()
         
     }
     mutating func disconnect() {
-        
+        if self.serverState != stateType.Unconnected  || self.serverState != stateType.Disconnected {
+            self.session = NSURLSession.sharedSession()
+            self.serverState = stateType.Disconnected
+        }
     }
 }
