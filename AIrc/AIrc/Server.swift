@@ -12,8 +12,11 @@ let UNSECURE_PORT = 6667
 let SECURE_PORT = 6697
 
 
+
+
 protocol Convenience{
-    mutating func connect()
+    mutating func connectTest() -> Bool
+    mutating func connect(option:String)
     mutating func disconnect()
 }
 
@@ -108,7 +111,11 @@ struct AIServer : Convenience {
         
     }
     
-    mutating func connect() {
+    mutating func connectTest() -> Bool {
+        return false
+    }
+    
+    mutating func connect(option:String) {
         var url:NSURL
         if self.port == SECURE_PORT {
             url = NSURL(string: "https://" + self.address + ":" + self.port.description)!
