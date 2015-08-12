@@ -27,14 +27,19 @@ let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
 
-class AIServerTableViewController: UITableViewController {
+class AIServerTableViewController: UITableViewController, NSStreamDelegate {
     var userClient:AIClient = AIClient()
+    var outputStream = NSOutputStream()
+    var inputStream = NSInputStream()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         userClient.loadUser()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingClientSettings:", name: UpdatingClientSettingsNotification, object: nil)
+        
         //tempConnection()
         
     }
@@ -87,19 +92,83 @@ class AIServerTableViewController: UITableViewController {
     
     func tempConnection(){
        // let url = NSURL(string: "http://localhost:4000/blog_info")!
-        let url2 = NSURL(string: "http://chat.freenode.net:6667")!
+        //let url2 = NSURL(string: "http://chat.freenode.net:6667")!
+        var readStream: Unmanaged<CFReadStreamRef>?
+        var writeStream: Unmanaged<CFWriteStreamRef>?
+        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, "http://chat.freenode.net", 6667, &readStream, &writeStream)
+        self.inputStream = readStream!.takeRetainedValue()
+        self.outputStream = writeStream!.takeRetainedValue()
+        
+        self.inputStream.delegate = self
+        self.outputStream.delegate = self
+        
+        self.inputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        self.outputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        
+        self.inputStream.open()
+        self.outputStream.open()
+        
+       /*
         let task = NSURLSession.sharedSession().dataTaskWithURL(url2){ (data, response, error) in
+            //self.outputStream = NSOutputStream(
+            self.inputStream  = NSInputStream(URL: url2)!
+            
+            //self.inputStream.open()
+            //print(self.inputStream.description)
             dispatch_async(dispatch_get_main_queue(), {
+                
                 self.getData(data!)
-                print(response?.description)
+                //print(response?.description)
                 let tView = self.view as! UITableView
                 tView.reloadData()
             })
         }
         task.resume()
+*/
         
     }
     
+    func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent) {
+        switch (eventCode){
+        case NSStreamEvent.ErrorOccurred:
+            NSLog("ErrorOccurred")
+            break
+        case NSStreamEvent.EndEncountered:
+            NSLog("EndEncountered")
+            break
+        case NSStreamEvent.None:
+            NSLog("None")
+            break
+        case NSStreamEvent.HasBytesAvailable:
+            NSLog("HasBytesAvaible")
+            var buffer = [UInt8](count: 4096, repeatedValue: 0)
+            if ( aStream == self.inputStream){
+                
+                while (self.inputStream.hasBytesAvailable){
+                    let len = self.inputStream.read(&buffer, maxLength: buffer.count)
+                    if(len > 0){
+                        let output = NSString(bytes: &buffer, length: buffer.count, encoding: NSUTF8StringEncoding)
+                        if (output != ""){
+                            NSLog("server said: %@", output!)
+                        }
+                    }
+                }
+            }
+            break
+        //case NSStreamEvent.contains():
+          //  NSLog("allZeros")
+            //break
+        case NSStreamEvent.OpenCompleted:
+            NSLog("OpenCompleted")
+            break
+        case NSStreamEvent.HasSpaceAvailable:
+            NSLog("HasSpaceAvailable")
+            break
+        default:
+            break
+        }
+        
+    }
     func getData(data:NSData){
         //var error: NSError?
         //var jsonObj: AnyObject?

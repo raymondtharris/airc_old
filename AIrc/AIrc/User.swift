@@ -9,13 +9,13 @@
 import Foundation
 
 
-struct AIUser {
+class AIUser:NSObject, NSCoding {
     var name:String //User name
     var nickname:String // Nickname for user
-    var description: String{ //description for user
+    override var description: String{ //description for user
         return "\(name) \(nickname)"
     }
-    init(){
+    override init(){
         name = "User1"
         nickname = "NickUser1"
     }
@@ -27,10 +27,11 @@ struct AIUser {
         self.name = name
         self.nickname = name
     }
-    mutating func setName(name: String){
-        self.name = name
+    func encodeWithCoder(aCoder: NSCoder) {
+        
     }
-    mutating func setNickname(nickname: String){
-        self.nickname = nickname
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.nickname = aDecoder.decodeObjectForKey("nickname") as! String
     }
 }

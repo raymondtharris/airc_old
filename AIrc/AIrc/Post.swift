@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct AIPost {
+class AIPost:NSObject, NSCoding {
     var body:String
     var datePosted:NSDate
     var user:AIUser
-    var description: String{
+    override var description: String{
         return "\(user) \(datePosted): \(body)"
     }
     
@@ -25,6 +25,14 @@ struct AIPost {
         self.user = user
         self.body = body
         self.datePosted = NSDate()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.body = aDecoder.decodeObjectForKey("body") as! String
+        self.datePosted = aDecoder.decodeObjectForKey("datePosted") as! NSDate
+        self.user = aDecoder.decodeObjectForKey("user") as! AIUser
+    }
+    func encodeWithCoder(aCoder: NSCoder) {
+        
     }
     
 }
