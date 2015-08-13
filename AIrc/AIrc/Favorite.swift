@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct Favorite {
+class Favorite: NSObject, NSCoding {
     var post:AIPost
     var dateFavorited:NSDate
-    var desciption:String{
+    override var description:String{
         return "\(dateFavorited):  \(post.description)"
     }
     init(post:AIPost){
@@ -21,5 +21,12 @@ struct Favorite {
     init(post:AIPost, dateFavorited:NSDate){
         self.post = post
         self.dateFavorited = dateFavorited
+    }
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.post = aDecoder.decodeObjectForKey("post") as! AIPost
+        self.dateFavorited = aDecoder.decodeObjectForKey("dateFavorited") as! NSDate
     }
 }

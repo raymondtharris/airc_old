@@ -26,14 +26,14 @@ enum stateType : CustomStringConvertible{
 }
 
 
-struct AIChannel {
+class AIChannel:NSObject, NSCoding {
     var name: String // Name of the channel
     var unreadCount:Int // Unread count of the channel
     var connection:NSURLSession // Session for channel
     var channelState: stateType // State of the channel
     var mediaLibrary:[AIMedia] // Array of media found on the channel
     var autoReconnect:Bool //Recoonect to server automatically
-    var description: String{ // Description of the channel
+    override var description: String{ // Description of the channel
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }
     init(name:String){
@@ -52,14 +52,15 @@ struct AIChannel {
         self.mediaLibrary = [AIMedia]()
         self.autoReconnect = autoReconnect
     }
-    
-    mutating func setName(name: String){ // Changes the name of the channel
-        self.name = name
+    func encodeWithCoder(aCoder: NSCoder) {
+        
     }
-    mutating func setUnreadCount(unreadCount: Int){
-        self.unreadCount = unreadCount
-    }
-    mutating func setAutoReconnect(autoReconnect: Bool){
-        self.autoReconnect = autoReconnect
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.unreadCount = aDecoder.decodeObjectForKey("unreadCount") as! Int
+        self.connection = aDecoder.decodeObjectForKey("connectionn") as! NSURLSession
+        self.channelState = aDecoder.decodeObjectForKey("channelState") as! stateType
+        self.mediaLibrary = aDecoder.decodeObjectForKey("mediaLibrary") as! [AIMedia]
+        self.autoReconnect = aDecoder.decodeObjectForKey("autoReconnect") as! Bool
     }
 }
