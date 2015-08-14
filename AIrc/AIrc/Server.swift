@@ -15,13 +15,13 @@ let SECURE_PORT = 6697
 
 
 protocol Convenience{
-    mutating func connectTest() -> Bool
-    mutating func connect(option:String)
-    mutating func disconnect()
+    func connectTest() -> Bool
+    func connect(option:String)
+    func disconnect()
 }
 
 
-struct AIServer : Convenience {
+class AIServer : NSObject, NSCoding, Convenience {
     var name:String //Name of the server
     var port:Int //Port number used to connect to server
     var address:String //The address for the server
@@ -32,11 +32,11 @@ struct AIServer : Convenience {
     var serverState: stateType //State of server for the user
     var session: NSURLSession //Session for Server
     
-    var description: String{
+    override var description: String{
         //Description for AIServer
         return "\(name) \(port) \(address)"
     }
-    init(){
+    override init(){
         name = "Temp"
         port = UNSECURE_PORT
         address = "http://chat.freenode.net"
@@ -75,21 +75,36 @@ struct AIServer : Convenience {
         self.serverState = stateType.Unconnected
         self.session = NSURLSession.sharedSession()
     }
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.port = aDecoder.decodeObjectForKey("port") as! Int
+        self.address = aDecoder.decodeObjectForKey("address") as! String
+        self.connectedChannels = aDecoder.decodeObjectForKey("connectedChannels") as! [AIChannel]
+        self.user = aDecoder.decodeObjectForKey("user") as! AIUser
+        self.serverChannelList = aDecoder.decodeObjectForKey("serverChannelList") as! [AIChannel]
+        self.useSecureConnection = aDecoder.decodeObjectForKey("useSecureConnection") as! Bool
+        self.serverState = aDecoder.decodeObjectForKey("serverState") as! stateType
+        self.session = aDecoder.decodeObjectForKey("session") as! NSURLSession
+    }
     
-    mutating func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
+    
+    func addChannel(channel:AIChannel){ //Adds Channel to connectedChannels array
         connectedChannels.append(channel)
     }
-    mutating func removeChannel(channel:AIChannel){
+    func removeChannel(channel:AIChannel){
         
     }
-    mutating func removeChannelByName(channelName:String){
+    func removeChannelByName(channelName:String){
         
     }
-    mutating func updateUser(userData:AIUser){ //Updates user data
+    func updateUser(userData:AIUser){ //Updates user data
         user = userData
     }
     
-    mutating func joinChannel(channel:AIChannel){
+    func joinChannel(channel:AIChannel){
         // Function to join a channel found one the server
         if useSecureConnection{
             self.port = SECURE_PORT
@@ -107,15 +122,15 @@ struct AIServer : Convenience {
         addChannel(channel)
     }
     
-    mutating func fetchChannelList(){
+    func fetchChannelList(){
         
     }
     
-    mutating func connectTest() -> Bool {
+    func connectTest() -> Bool {
         return false
     }
     
-    mutating func connect(option:String) {
+    func connect(option:String) {
         var url:NSURL
         if self.port == SECURE_PORT {
             url = NSURL(string: "https://" + self.address + ":" + self.port.description)!
@@ -137,10 +152,11 @@ struct AIServer : Convenience {
         connectTask.resume()
         
     }
-    mutating func disconnect() {
+    func disconnect() {
         if self.serverState != stateType.Unconnected  || self.serverState != stateType.Disconnected {
             self.session = NSURLSession.sharedSession()
             self.serverState = stateType.Disconnected
         }
     }
+    
 }
