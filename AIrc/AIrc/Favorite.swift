@@ -23,7 +23,8 @@ class Favorite: NSObject, NSCoding {
         self.dateFavorited = dateFavorited
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.post, forKey: "post")
+        aCoder.encodeObject(self.dateFavorited, forKey: "dateFavorited")
     }
     required init?(coder aDecoder: NSCoder) {
         self.post = aDecoder.decodeObjectForKey("post") as! AIPost

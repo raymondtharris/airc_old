@@ -32,7 +32,9 @@ class AIPost:NSObject, NSCoding {
         self.user = aDecoder.decodeObjectForKey("user") as! AIUser
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.body, forKey: "body")
+        aCoder.encodeObject(self.datePosted, forKey: "datePosted")
+        aCoder.encodeObject(self.user, forKey: "user")
     }
     
 }

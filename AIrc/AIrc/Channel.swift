@@ -53,7 +53,12 @@ class AIChannel:NSObject, NSCoding {
         self.autoReconnect = autoReconnect
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.unreadCount, forKey: "unreadCount")
+        aCoder.encodeObject(self.connection, forKey: "connection")
+        aCoder.encodeObject(self.mediaLibrary, forKey: "mediaLibrary")
+        aCoder.encodeObject(self.channelState.description, forKey: "channelState")
+        aCoder.encodeObject(self.autoReconnect, forKey: "autoReconnect")
     }
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String

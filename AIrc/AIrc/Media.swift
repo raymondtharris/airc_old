@@ -44,7 +44,10 @@ class AIMedia: NSObject, NSCoding{
         self.dateAdded = dateAdded
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.typeOfMedia.description, forKey: "typeOfMedia")
+        aCoder.encodeObject(self.filesize, forKey: "filesize")
+        aCoder.encodeObject(self.dateAdded, forKey: "dateAdded")
     }
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String
