@@ -76,6 +76,15 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.session = NSURLSession.sharedSession()
     }
     func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.port, forKey: "port")
+        aCoder.encodeObject(self.address, forKey: "address")
+        aCoder.encodeObject(self.connectedChannels, forKey: "connectedChannels")
+        aCoder.encodeObject(self.user, forKey: "user")
+        aCoder.encodeObject(self.serverChannelList, forKey: "serverChannelList")
+        aCoder.encodeObject(self.useSecureConnection, forKey: "useSecureConnection")
+        aCoder.encodeObject(self.serverState.description, forKey: "serverState")
+        aCoder.encodeObject(self.session, forKey: "session")
         
     }
     required init?(coder aDecoder: NSCoder) {

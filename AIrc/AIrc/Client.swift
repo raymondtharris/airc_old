@@ -69,7 +69,11 @@ class AIClient: NSObject, NSCoding {
         
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.nickName, forKey: "nickName")
+        aCoder.encodeObject(self.settings, forKey: "settings")
+        aCoder.encodeObject(self.connectedServers, forKey: "connectedServers")
+        aCoder.encodeObject(self.favorites, forKey: "favorites")
     }
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String
