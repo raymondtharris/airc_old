@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AIClient: NSObject {
+class AIClient: NSObject, NSCoding {
     var name:String //Name for client
     var nickName: String //Nickname for client
     var settings: ClientStettings // client settings variable
@@ -68,6 +68,17 @@ class AIClient: NSObject {
     func loadUser(){
         
     }
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.nickName = aDecoder.decodeObjectForKey("nickName") as! String
+        self.settings = aDecoder.decodeObjectForKey("settings") as! ClientStettings
+        self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
+        self.favorites = aDecoder.decodeObjectForKey("favorites") as! [Favorite]
+    }
+    
 }
 
 

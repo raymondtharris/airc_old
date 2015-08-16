@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ClientStettings{
+class ClientStettings: NSObject, NSCoding{
     var name:String
     var useSameName:Bool
     var nickName:String
@@ -19,7 +19,7 @@ class ClientStettings{
     var reconnectToServersOnOpen:Bool
     var reconnectToChannelsOnOpen:Bool
     
-    init(){
+    override init(){
         self.name = "Test"
         self.useSameName = true
         self.nickName = self.name
@@ -39,5 +39,18 @@ class ClientStettings{
         self.reconnectToServersOnOpen = settings.reconnectToServersOnOpen
         self.reconnectToChannelsOnOpen = settings.reconnectToChannelsOnOpen
 
+    }
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObjectForKey("name") as! String
+        self.useSameName = aDecoder.decodeObjectForKey("useSameName") as! Bool
+        self.nickName = aDecoder.decodeObjectForKey("nickName") as! String
+        self.useSameNickname = aDecoder.decodeObjectForKey("useSameNickname") as! Bool
+        self.saveMediaLength = aDecoder.decodeObjectForKey("saveMediaLength") as! Int
+        self.useSaveMediaLength = aDecoder.decodeObjectForKey("useSaveMediaLength") as! Bool
+        self.reconnectToServersOnOpen = aDecoder.decodeObjectForKey("reconnectToServersOnOpen") as! Bool
+        self.reconnectToChannelsOnOpen = aDecoder.decodeObjectForKey("recconectToChannelsOnOpen") as! Bool
     }
 }
