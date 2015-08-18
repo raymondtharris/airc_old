@@ -41,7 +41,14 @@ class ClientStettings: NSObject, NSCoding{
 
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        
+        aCoder.encodeObject(self.name, forKey: "name")
+        aCoder.encodeObject(self.useSameName, forKey: "useSameName")
+        aCoder.encodeObject(self.nickName, forKey: "nickName")
+        aCoder.encodeObject(self.useSameNickname, forKey: "useSameNickname")
+        aCoder.encodeObject(self.saveMediaLength, forKey: "saveMediaLength")
+        aCoder.encodeObject(self.useSaveMediaLength, forKey: "useSaveMediaLength")
+        aCoder.encodeObject(self.reconnectToServersOnOpen, forKey: "reconnectToServerOnOpen")
+        aCoder.encodeObject(self.reconnectToChannelsOnOpen, forKey: "reconnectToChannelOnOpen")
     }
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String
