@@ -14,6 +14,7 @@ class AIClient: NSObject, NSCoding {
     var settings: ClientStettings // client settings variable
     var connectedServers:[AIServer] // Array of conencted servers
     var favorites:[Favorite]
+    var saveDataPath: AIClientSavePath
     override var description: String{ // description string
         return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
     }
@@ -84,6 +85,21 @@ class AIClient: NSObject, NSCoding {
     }
     
 }
+
+class AIClientSavePath: NSObject {
+    var dataPath:String
+    override var description:String{
+        return "datapath: \(self.dataPath)"
+    }
+    override init() {
+        self.dataPath = "tempPath"
+    }
+    init(path:String){
+        self.dataPath = path
+    }
+    
+}
+
 
 
 class userInfoObject<T> {
