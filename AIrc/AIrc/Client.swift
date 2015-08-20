@@ -24,6 +24,7 @@ class AIClient: NSObject, NSCoding {
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
+        self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String) {
         self.name = name
@@ -31,6 +32,7 @@ class AIClient: NSObject, NSCoding {
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
+        self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String, connectedServers: [AIServer]){
         self.name = name
@@ -38,6 +40,7 @@ class AIClient: NSObject, NSCoding {
         self.connectedServers = connectedServers
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
+        self.saveDataPath = AIClientSavePath()
     }
     func addServer(server:AIServer){
         self.connectedServers.append(server)
@@ -82,6 +85,16 @@ class AIClient: NSObject, NSCoding {
         self.settings = aDecoder.decodeObjectForKey("settings") as! ClientStettings
         self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
         self.favorites = aDecoder.decodeObjectForKey("favorites") as! [Favorite]
+        self.saveDataPath = AIClientSavePath()
+    }
+    
+    func saveData(){
+        var dataToWrite = NSMutableData()
+        var archiver = NSKeyedArchiver(forWritingWithMutableData: dataToWrite)
+        archiver.encodeObject(self)
+        archiver.finishEncoding()
+        dataToWrite.writeToFile(self.saveDataPath.dataPath, atomically: true)
+        
     }
     
 }
