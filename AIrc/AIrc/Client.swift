@@ -80,15 +80,26 @@ class AIClient: NSObject, NSCoding {
         aCoder.encodeObject(self.favorites, forKey: "favorites")
     }
     required init?(coder aDecoder: NSCoder) {
+        //setup savedatapath
+        self.saveDataPath = AIClientSavePath()
+        //Check for the file
+        // if it exists load file
         self.name = aDecoder.decodeObjectForKey("name") as! String
         self.nickName = aDecoder.decodeObjectForKey("nickName") as! String
         self.settings = aDecoder.decodeObjectForKey("settings") as! ClientStettings
         self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
         self.favorites = aDecoder.decodeObjectForKey("favorites") as! [Favorite]
-        self.saveDataPath = AIClientSavePath()
+        
+        //else
+        self.name = "NewUser"
+        self.nickName = "TestUser"
+        self.connectedServers = [AIServer]()
+        self.settings = ClientStettings()
+        self.favorites = [Favorite]()
     }
     
     func saveData(){
+        // save data saves AICLient data to a file
         var dataToWrite = NSMutableData()
         var archiver = NSKeyedArchiver(forWritingWithMutableData: dataToWrite)
         archiver.encodeObject(self)
@@ -105,7 +116,7 @@ class AIClientSavePath: NSObject {
         return "datapath: \(self.dataPath)"
     }
     override init() {
-        self.dataPath = "tempPath"
+        self.dataPath = "clientdata.plist"
     }
     init(path:String){
         self.dataPath = path
