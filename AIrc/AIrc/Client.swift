@@ -8,6 +8,10 @@
 
 import Foundation
 
+let clientDataDirectory = NSSearchPathForDirectoriesInDomains( NSSearchPathDirectory.DocumentDirectory , NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+let clientDataFilename = "/clientdata.plist"
+let pathToFile = clientDataDirectory.stringByAppendingString(clientDataFilename)
+
 class AIClient: NSObject, NSCoding {
     var name:String //Name for client
     var nickName: String //Nickname for client
@@ -69,7 +73,14 @@ class AIClient: NSObject, NSCoding {
         addServer(server)
         return false
     }
-    func loadUser(){
+    func clientExists() -> Bool{
+        let fileManager = NSFileManager.defaultManager()
+        if !fileManager.fileExistsAtPath(pathToFile) {
+            return false
+        }
+        return true
+    }
+    func createClientDataFile(){
         
     }
     func encodeWithCoder(aCoder: NSCoder) {
@@ -99,6 +110,12 @@ class AIClient: NSObject, NSCoding {
     }
     
     func saveData(){
+        
+        if !clientExists(){
+            // make client
+            createClientDataFile()
+        }
+        
         // save data saves AICLient data to a file
         var dataToWrite = NSMutableData()
         var archiver = NSKeyedArchiver(forWritingWithMutableData: dataToWrite)
