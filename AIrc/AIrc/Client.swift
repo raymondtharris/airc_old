@@ -13,34 +13,28 @@ let clientDataFilename = "/clientdata.plist"
 let pathToFile = clientDataDirectory.stringByAppendingString(clientDataFilename)
 
 class AIClient: NSObject, NSCoding {
-    var name:String //Name for client
-    var nickName: String //Nickname for client
+    
     var settings: ClientStettings // client settings variable
     var connectedServers:[AIServer] // Array of conencted servers
     var favorites:[Favorite]
     var saveDataPath: AIClientSavePath
     override var description: String{ // description string
-        return "\(name) \(nickName) \nConnected to \(connectedServers.count) servers."
+        return "\(settings.name) \(settings.nickName) \nConnected to \(connectedServers.count) servers."
     }
     override init() {
-        self.name = "Test"
-        self.nickName = "Testing"
+        
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
         self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String) {
-        self.name = name
-        self.nickName = nickName
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
         self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String, connectedServers: [AIServer]){
-        self.name = name
-        self.nickName = nickName
         self.connectedServers = connectedServers
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
@@ -84,8 +78,6 @@ class AIClient: NSObject, NSCoding {
         
     }
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.nickName, forKey: "nickName")
         aCoder.encodeObject(self.settings, forKey: "settings")
         aCoder.encodeObject(self.connectedServers, forKey: "connectedServers")
         aCoder.encodeObject(self.favorites, forKey: "favorites")
@@ -95,15 +87,11 @@ class AIClient: NSObject, NSCoding {
         self.saveDataPath = AIClientSavePath()
         //Check for the file
         // if it exists load file
-        self.name = aDecoder.decodeObjectForKey("name") as! String
-        self.nickName = aDecoder.decodeObjectForKey("nickName") as! String
         self.settings = aDecoder.decodeObjectForKey("settings") as! ClientStettings
         self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
         self.favorites = aDecoder.decodeObjectForKey("favorites") as! [Favorite]
         
         //else
-        self.name = "NewUser"
-        self.nickName = "TestUser"
         self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()

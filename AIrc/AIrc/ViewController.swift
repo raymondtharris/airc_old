@@ -31,11 +31,14 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate {
     var userClient:AIClient = AIClient()
     var outputStream = NSOutputStream()
     var inputStream = NSInputStream()
+    var userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userClient.loadUser()
+        if userDefaults.objectForKey("name") != nil {
+            userClient.settings.name =  userDefaults.objectForKey("name") as! String
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingClientSettings:", name: UpdatingClientSettingsNotification, object: nil)
@@ -75,8 +78,8 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate {
             
             let vcon = segue.destinationViewController as! AIClientSettingsViewController
             vcon.clientData = userClient
-            vcon.SettingsNameTextField.text = userClient.name
-            vcon.SettingsNicknameTextField.text = userClient.nickName
+            vcon.SettingsNameTextField.text = userClient.settings.name
+            vcon.SettingsNicknameTextField.text = userClient.settings.nickName
             
             vcon.SettingsSameNameSwitch.on = userClient.settings.useSameName.boolValue
             vcon.SettingsSameNicknameSwitch.on = userClient.settings.useSameNickname.boolValue
@@ -202,7 +205,7 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate {
         let dataDictionary:Dictionary = notification.userInfo!
         print(dataDictionary)
         
-        self.userClient.settings = dataDictionary["data"]!.clientData.settings as ClientStettings
+        self.userClient.settings = dataDictionary["data"]!.settings as ClientStettings
         
     }
 }
@@ -282,10 +285,15 @@ class AIClientSettingsViewController: UIViewController {
     @IBOutlet weak var SettingsDoneButton: UIBarButtonItem!
     
     var clientData = AIClient()
-    
+    var userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if userDefaults.objectForKey("name") != nil {
+            clientData.settings.name = userDefaults.objectForKey("name") as! String
+            SettingsNameTextField.text = clientData.settings.name
+        }
     }
     @IBAction func UpdateSettings(sender: AnyObject) {
         if self.clientData.settings.useSameNickname != self.SettingsSameNicknameSwitch.on {
@@ -305,7 +313,7 @@ class AIClientSettingsViewController: UIViewController {
         }
         let temp = Int(self.SettingsSaveDurationTextField.text!)
         if self.clientData.settings.saveMediaLength != temp {
-            self.clientData.settings.saveMediaLength = temp!
+            self.clientData.settings.saveMediaLength = 4
         }
         if self.clientData.settings.reconnectToServersOnOpen != self.SettingsReconnectServerSwitch.on {
             self.clientData.settings.reconnectToServersOnOpen = self.SettingsReconnectServerSwitch.on
@@ -315,7 +323,8 @@ class AIClientSettingsViewController: UIViewController {
         }
         
         let dataDictionay:Dictionary = ["data": self.clientData]
-        
+        print(dataDictionay["data"]?.settings)
+        userDefaults.setValue(clientData.settings.name, forKey: "name")
         NSNotificationCenter.defaultCenter().postNotificationName(UpdatingClientSettingsNotification, object: self, userInfo: dataDictionay as [NSObject: AnyObject])
         
         

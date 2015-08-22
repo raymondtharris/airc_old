@@ -19,6 +19,10 @@ class ClientStettings: NSObject, NSCoding{
     var reconnectToServersOnOpen:Bool
     var reconnectToChannelsOnOpen:Bool
     
+    override var description: String{
+        return "name: \(name) \(useSameName) nickname: \(nickName) \(useSameNickname)"
+    }
+    
     override init(){
         self.name = "Test"
         self.useSameName = true
