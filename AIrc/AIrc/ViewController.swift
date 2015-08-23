@@ -23,22 +23,34 @@ class ViewController: UIViewController {
 
 }
 
+protocol AIClientData{
+    func loadDefaults()
+}
+
+
 let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
 
-class AIServerTableViewController: UITableViewController, NSStreamDelegate {
+class AIServerTableViewController: UITableViewController, NSStreamDelegate, AIClientData {
     var userClient:AIClient = AIClient()
     var outputStream = NSOutputStream()
     var inputStream = NSInputStream()
     var userDefaults = NSUserDefaults.standardUserDefaults()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func loadDefaults() {
         if userDefaults.objectForKey("name") != nil {
             userClient.settings.name =  userDefaults.objectForKey("name") as! String
         }
+        if userDefaults.objectForKey("nickName") != nil {
+            userClient.settings.nickName =  userDefaults.objectForKey("nickName") as! String
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadDefaults()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addingNewServer:", name: AddingServerNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updatingClientSettings:", name: UpdatingClientSettingsNotification, object: nil)
@@ -261,7 +273,7 @@ class AIChannelChatViewController: UIViewController {
     
 }
 
-class AIClientSettingsViewController: UIViewController {
+class AIClientSettingsViewController: UIViewController, AIClientData {
     @IBOutlet weak var SettingsNameLabel: UILabel!
     @IBOutlet weak var SettingsNameTextField: UITextField!
     @IBOutlet weak var SettingsNicknameLabel: UILabel!
@@ -287,13 +299,21 @@ class AIClientSettingsViewController: UIViewController {
     var clientData = AIClient()
     var userDefaults = NSUserDefaults.standardUserDefaults()
     
+    func loadDefaults() {
+        if userDefaults.objectForKey("name") != nil {
+            clientData.settings.name =  userDefaults.objectForKey("name") as! String
+            SettingsNameTextField.text = clientData.settings.name
+        }
+        if userDefaults.objectForKey("nickName") != nil {
+            clientData.settings.nickName =  userDefaults.objectForKey("nickName") as! String
+            SettingsNicknameTextField.text = clientData.settings.nickName
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if userDefaults.objectForKey("name") != nil {
-            clientData.settings.name = userDefaults.objectForKey("name") as! String
-            SettingsNameTextField.text = clientData.settings.name
-        }
+        loadDefaults()
     }
     @IBAction func UpdateSettings(sender: AnyObject) {
         if self.clientData.settings.useSameNickname != self.SettingsSameNicknameSwitch.on {
@@ -323,8 +343,9 @@ class AIClientSettingsViewController: UIViewController {
         }
         
         let dataDictionay:Dictionary = ["data": self.clientData]
-        print(dataDictionay["data"]?.settings)
+        
         userDefaults.setValue(clientData.settings.name, forKey: "name")
+        userDefaults.setValue(clientData.settings.nickName, forKey: "nickName")
         NSNotificationCenter.defaultCenter().postNotificationName(UpdatingClientSettingsNotification, object: self, userInfo: dataDictionay as [NSObject: AnyObject])
         
         
