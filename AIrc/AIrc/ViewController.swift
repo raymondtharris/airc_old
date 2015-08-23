@@ -308,6 +308,30 @@ class AIClientSettingsViewController: UIViewController, AIClientData {
             clientData.settings.nickName =  userDefaults.objectForKey("nickName") as! String
             SettingsNicknameTextField.text = clientData.settings.nickName
         }
+        if userDefaults.objectForKey("useSameName") != nil {
+            clientData.settings.useSameName =  userDefaults.objectForKey("useSameName") as! Bool
+            SettingsSameNameSwitch.on = clientData.settings.useSameName
+        }
+        if userDefaults.objectForKey("useSameNickname") != nil {
+            clientData.settings.useSameNickname =  userDefaults.objectForKey("useSameNickname") as! Bool
+            SettingsSameNicknameSwitch.on = clientData.settings.useSameNickname
+        }
+        if userDefaults.objectForKey("useSaveMediaLength") != nil {
+            clientData.settings.useSaveMediaLength =  userDefaults.objectForKey("useSaveMediaLength") as! Bool
+            SettingsSaveMediaSwitch.on = clientData.settings.useSaveMediaLength
+        }
+        if userDefaults.objectForKey("saveMediaLength") != nil {
+            clientData.settings.saveMediaLength =  userDefaults.objectForKey("saveMediaLength") as! Int
+            SettingsSaveDurationTextField.text = clientData.settings.saveMediaLength.description
+        }
+        if userDefaults.objectForKey("reconnectToServersOnOpen") != nil {
+            clientData.settings.reconnectToServersOnOpen =  userDefaults.objectForKey("reconnectToServersOnOpen") as! Bool
+            SettingsReconnectServerSwitch.on = clientData.settings.reconnectToServersOnOpen
+        }
+        if userDefaults.objectForKey("reconnectToChannelsOnOpen") != nil {
+            clientData.settings.reconnectToChannelsOnOpen =  userDefaults.objectForKey("reconnectToChannelsOnOpen") as! Bool
+            SettingsReconnectChannelSwitch.on = clientData.settings.reconnectToChannelsOnOpen
+        }
     }
     
     override func viewDidLoad() {
@@ -346,6 +370,13 @@ class AIClientSettingsViewController: UIViewController, AIClientData {
         
         userDefaults.setValue(clientData.settings.name, forKey: "name")
         userDefaults.setValue(clientData.settings.nickName, forKey: "nickName")
+        userDefaults.setValue(clientData.settings.useSameName, forKey: "useSameName")
+        userDefaults.setValue(clientData.settings.useSameNickname, forKey: "useSameNickname")
+        userDefaults.setValue(clientData.settings.useSaveMediaLength, forKey: "useSaveMediaLength")
+        userDefaults.setValue(clientData.settings.saveMediaLength, forKey: "saveMediaLength")
+        userDefaults.setValue(clientData.settings.reconnectToServersOnOpen, forKey: "reconnectToServersOnOpen")
+        userDefaults.setValue(clientData.settings.reconnectToChannelsOnOpen, forKey: "reconnectToChannelsOnOpen")
+        
         NSNotificationCenter.defaultCenter().postNotificationName(UpdatingClientSettingsNotification, object: self, userInfo: dataDictionay as [NSObject: AnyObject])
         
         
@@ -374,7 +405,7 @@ class AIServerConfigurationViewController: UIViewController {
     }
     @IBAction func addServer(sender: AnyObject) {
         // Making a server work
-        var newServer = AIServer(name: self.serverAddressTextField.text!, address: self.serverAddressTextField.text!, user: AIUser(), useSecureConnection: self.serverSecurePortSwitch.on)
+        let newServer = AIServer(name: self.serverAddressTextField.text!, address: self.serverAddressTextField.text!, user: AIUser(), useSecureConnection: self.serverSecurePortSwitch.on)
         if self.serverSameCredentialsSwitch.on{
             // Get Client name and nickname
         } else{
