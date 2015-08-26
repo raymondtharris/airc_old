@@ -680,7 +680,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-6w-nM3">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Channel Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-6w-nM3">
                                 <rect key="frame" x="116" y="106" width="464" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -688,6 +688,20 @@
                                     <rect key="frame" x="84" y="102" width="296" height="30"/>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpW-B1-DYQ">
+                                <rect key="frame" x="20" y="410" width="560" height="69"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.53333333329999999" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="Add Channel">
+                                    <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="410" width="360" height="69"/>
+                                </variation>
+                                <connections>
+                                    <action selector="addChannel:" destination="b1u-eb-gvb" eventType="touchUpInside" id="NuO-KS-XYO"/>
+                                </connections>
+                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFm-fD-Eed">
                                 <rect key="frame" x="531" y="156" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -712,22 +726,48 @@
                                     <rect key="frame" x="20" y="157" width="123" height="21"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpW-B1-DYQ">
-                                <rect key="frame" x="20" y="410" width="560" height="69"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.53333333329999999" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="Add Channel">
-                                    <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="410" width="360" height="69"/>
-                                </variation>
-                                <connections>
-                                    <action selector="addChannel:" destination="b1u-eb-gvb" eventType="touchUpInside" id="NuO-KS-XYO"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="HnJ-ZT-AT9" secondAttribute="leading" id="2Ex-Wh-jif"/>
+                            <constraint firstItem="uFm-fD-Eed" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Twa-qZ-g6f" secondAttribute="leadingMargin" constant="311" id="D96-5t-etA"/>
+                            <constraint firstItem="HnJ-ZT-AT9" firstAttribute="top" secondItem="7i9-Aj-Taa" secondAttribute="bottom" constant="93" id="DQz-6x-kE4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="uT1-ka-k7P" secondAttribute="leading" id="NVG-eY-yBh"/>
+                            <constraint firstItem="bOh-6w-nM3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Twa-qZ-g6f" secondAttribute="leadingMargin" constant="64" id="TNH-8p-DSZ"/>
+                            <constraint firstItem="uFm-fD-Eed" firstAttribute="top" secondItem="7i9-Aj-Taa" secondAttribute="bottom" constant="88" id="cgB-T4-Lgd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uFm-fD-Eed" secondAttribute="trailing" id="dNn-AE-eS9"/>
+                            <constraint firstItem="bOh-6w-nM3" firstAttribute="top" secondItem="7i9-Aj-Taa" secondAttribute="bottom" constant="38" id="qls-Jv-2pn"/>
+                            <constraint firstItem="uT1-ka-k7P" firstAttribute="top" secondItem="7i9-Aj-Taa" secondAttribute="bottom" constant="42" id="uaj-3r-I5A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bOh-6w-nM3" secondAttribute="trailing" id="yZz-Sc-HHJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NVG-eY-yBh"/>
+                                <exclude reference="uaj-3r-I5A"/>
+                                <exclude reference="TNH-8p-DSZ"/>
+                                <exclude reference="qls-Jv-2pn"/>
+                                <exclude reference="yZz-Sc-HHJ"/>
+                                <exclude reference="2Ex-Wh-jif"/>
+                                <exclude reference="DQz-6x-kE4"/>
+                                <exclude reference="D96-5t-etA"/>
+                                <exclude reference="cgB-T4-Lgd"/>
+                                <exclude reference="dNn-AE-eS9"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="NVG-eY-yBh"/>
+                                <include reference="uaj-3r-I5A"/>
+                                <include reference="TNH-8p-DSZ"/>
+                                <include reference="qls-Jv-2pn"/>
+                                <include reference="yZz-Sc-HHJ"/>
+                                <include reference="2Ex-Wh-jif"/>
+                                <include reference="DQz-6x-kE4"/>
+                                <include reference="D96-5t-etA"/>
+                                <include reference="cgB-T4-Lgd"/>
+                                <include reference="dNn-AE-eS9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="New Channel" id="SWS-RA-Sih"/>
                     <connections>
