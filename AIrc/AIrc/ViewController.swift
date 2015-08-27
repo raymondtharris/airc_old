@@ -210,6 +210,16 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
         print(dataDictionary)
         let serverToAdd:AIServer = AIServer(name: dataDictionary["address"] as! String, address: dataDictionary["address"] as! String, user: AIUser(name: dataDictionary["user"] as! String, nickname: dataDictionary["nickname"] as! String), useSecureConnection: dataDictionary["secure"] as! Bool)
         self.userClient.connectedServers.append(serverToAdd)
+        var tempData:NSMutableArray = NSMutableArray()
+        for server in self.userClient.connectedServers {
+            //var archiver = NSKeyedArchiver()
+            
+            tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
+            print("ss")
+        }
+        
+        self.userDefaults.setObject(tempData, forKey: "connectedServers")
+        
         let tableView = self.view as! UITableView
         tableView.reloadData()
     }
