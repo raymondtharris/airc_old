@@ -18,7 +18,20 @@ protocol Convenience{
     func connectTest() -> Bool
     func connect(option:String)
     func disconnect()
+    
 }
+
+func convertType(stringType:String) ->stateType{
+    switch stringType{
+    case "Connected": return stateType.Connected;
+    case "Unconnected": return stateType.Unconnected;
+    case "Disconnected": return stateType.Disconnected;
+    case "Reconnecting": return stateType.Reconnecting;
+    case "Connecting": return stateType.Connecting;
+    default: return stateType.Disconnected;
+    }
+}
+ 
 
 
 class AIServer : NSObject, NSCoding, Convenience {
@@ -30,7 +43,9 @@ class AIServer : NSObject, NSCoding, Convenience {
     var serverChannelList:[AIChannel] //List of channels on the server
     var useSecureConnection:Bool //Is connection using secure port
     var serverState: stateType //State of server for the user
-    var session: NSURLSession //Session for Server
+    var session: NSURLSession = NSURLSession.sharedSession() //Session for Server
+    
+    
     
     override var description: String{
         //Description for AIServer
@@ -45,7 +60,7 @@ class AIServer : NSObject, NSCoding, Convenience {
         serverChannelList = [AIChannel]()
         useSecureConnection = false
         serverState = stateType.Unconnected
-        session = NSURLSession.sharedSession()
+        //session = NSURLSession.sharedSession()
     }
     
     init(name: String, port: Int, address: String, user: AIUser, useSecureConnection: Bool){
@@ -57,7 +72,7 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.serverChannelList = [AIChannel]()
         self.useSecureConnection = useSecureConnection
         self.serverState = stateType.Unconnected
-        self.session = NSURLSession.sharedSession()
+        //self.session = NSURLSession.sharedSession()
     }
     
     init(name: String, address: String, user: AIUser, useSecureConnection: Bool){
@@ -73,7 +88,7 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.serverChannelList = [AIChannel]()
         self.useSecureConnection = useSecureConnection
         self.serverState = stateType.Unconnected
-        self.session = NSURLSession.sharedSession()
+        //self.session = NSURLSession.sharedSession()
     }
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
@@ -84,7 +99,7 @@ class AIServer : NSObject, NSCoding, Convenience {
         aCoder.encodeObject(self.serverChannelList, forKey: "serverChannelList")
         aCoder.encodeObject(self.useSecureConnection, forKey: "useSecureConnection")
         aCoder.encodeObject(self.serverState.description, forKey: "serverState")
-        aCoder.encodeObject(self.session, forKey: "session")
+        //aCoder.encodeObject(self.session, forKey: "session")
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -95,8 +110,8 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.user = aDecoder.decodeObjectForKey("user") as! AIUser
         self.serverChannelList = aDecoder.decodeObjectForKey("serverChannelList") as! [AIChannel]
         self.useSecureConnection = aDecoder.decodeObjectForKey("useSecureConnection") as! Bool
-        self.serverState = aDecoder.decodeObjectForKey("serverState") as! stateType
-        self.session = aDecoder.decodeObjectForKey("session") as! NSURLSession
+        self.serverState = convertType( aDecoder.decodeObjectForKey("serverState") as! String)
+        //self.session = aDecoder.decodeObjectForKey("session") as! NSURLSession
     }
     
     

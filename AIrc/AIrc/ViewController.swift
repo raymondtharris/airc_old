@@ -45,6 +45,13 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
         if userDefaults.objectForKey("nickName") != nil {
             userClient.settings.nickName =  userDefaults.objectForKey("nickName") as! String
         }
+        if userDefaults.objectForKey("connectedServers") != nil {
+            let servers = userDefaults.objectForKey("connectedServers") as! NSArray
+            for server in servers {
+                //print(server as! AIServer)
+                self.userClient.connectedServers.append(NSKeyedUnarchiver.unarchiveObjectWithData(server as! NSData) as! AIServer)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -210,10 +217,11 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
         print(dataDictionary)
         let serverToAdd:AIServer = AIServer(name: dataDictionary["address"] as! String, address: dataDictionary["address"] as! String, user: AIUser(name: dataDictionary["user"] as! String, nickname: dataDictionary["nickname"] as! String), useSecureConnection: dataDictionary["secure"] as! Bool)
         self.userClient.connectedServers.append(serverToAdd)
+        print(self.userClient.connectedServers)
         var tempData:NSMutableArray = NSMutableArray()
         for server in self.userClient.connectedServers {
             //var archiver = NSKeyedArchiver()
-            
+            print("preee")
             tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
             print("ss")
         }
