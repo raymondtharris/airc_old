@@ -22,6 +22,7 @@ protocol Convenience{
 }
 
 func convertType(stringType:String) ->stateType{
+    //Converts the string value of a stateType back in to a stateType. Used for initWithEncoder
     switch stringType{
     case "Connected": return stateType.Connected;
     case "Unconnected": return stateType.Unconnected;
@@ -31,7 +32,7 @@ func convertType(stringType:String) ->stateType{
     default: return stateType.Disconnected;
     }
 }
- 
+
 
 
 class AIServer : NSObject, NSCoding, Convenience {

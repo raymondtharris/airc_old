@@ -265,6 +265,7 @@ class AIChannelTableViewController: UITableViewController {
         print(dataDictionary)
         let channelToAdd = AIChannel(name: dataDictionary["name"] as! String, unreadCount: 0, channelState: stateType.Connecting, autoReconnect: dataDictionary["auto"] as! Bool)
         self.connectedChannels.append(channelToAdd)
+        self.server.connectedChannels = self.connectedChannels
         let tableView = self.view as! UITableView
         tableView.reloadData()
     }
