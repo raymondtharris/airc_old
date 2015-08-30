@@ -151,6 +151,15 @@ class AIServer : NSObject, NSCoding, Convenience {
         
     }
     
+    func postMessageToChannel(Channel: AIChannel, Post: AIPost) -> Bool{
+        print(Post.body)
+        let postString: String = "\(self.user.nickname) : \(Post.body)"
+        print(postString)
+        
+        return false
+    }
+    
+    
     func connectTest() -> Bool {
         return false
     }
