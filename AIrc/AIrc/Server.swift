@@ -184,6 +184,20 @@ class AIServer : NSObject, NSCoding, Convenience {
         
         })
         connectTask.resume()
+        let sendReq = NSMutableURLRequest(URL: url)
+        let sendStr = "NICK \(self.user.nickname)\nUSER \(self.user.name) 1 1 1:Hi this is a test"
+        sendReq.HTTPMethod = "POST"
+        sendReq.HTTPBody = sendStr.dataUsingEncoding(NSUTF8StringEncoding)!
+        //sendReq.setValue("NICK \(self.user.nickname)\nUSER \(self.user.name) 1 1 1:Hi this is a test", forKey: "HTTPBody")
+
+        let SendTask = self.session.dataTaskWithRequest(sendReq, completionHandler: {(data,response, err) in
+            let str = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+            print(str)
+            print(response?.description)
+        })
+        SendTask.resume()
+        //self.session.configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        
         
     }
     func disconnect() {

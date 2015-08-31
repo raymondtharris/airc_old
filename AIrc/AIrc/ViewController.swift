@@ -46,11 +46,13 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
             userClient.settings.nickName =  userDefaults.objectForKey("nickName") as! String
         }
         if userDefaults.objectForKey("connectedServers") != nil {
+            //userDefaults.removeObjectForKey("connectedServers")
             let servers = userDefaults.objectForKey("connectedServers") as! NSArray
             for server in servers {
                 //print(server as! AIServer)
                 self.userClient.connectedServers.append(NSKeyedUnarchiver.unarchiveObjectWithData(server as! NSData) as! AIServer)
             }
+            
         }
     }
     
@@ -221,9 +223,7 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
         var tempData:NSMutableArray = NSMutableArray()
         for server in self.userClient.connectedServers {
             //var archiver = NSKeyedArchiver()
-            print("preee")
             tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
-            print("ss")
         }
         
         self.userDefaults.setObject(tempData, forKey: "connectedServers")
