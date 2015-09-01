@@ -46,6 +46,9 @@ class AIServer : NSObject, NSCoding, Convenience {
     var serverState: stateType //State of server for the user
     var session: NSURLSession = NSURLSession.sharedSession() //Session for Server
     
+    var inputStream:NSInputStream = NSInputStream()
+    var outputStream:NSOutputStream = NSOutputStream()
+    
     
     
     override var description: String{
@@ -161,6 +164,24 @@ class AIServer : NSObject, NSCoding, Convenience {
     
     
     func connectTest() -> Bool {
+        var readStream:NSInputStream?
+        var writeStream:NSOutputStream?
+        autoreleasepool({ () in
+            NSStream.getStreamsToHostWithName("http://chat.freenode.net", port: 6667, inputStream: &readStream, outputStream: &writeStream)
+            
+            let inputStream = readStream!
+            let outputStream = writeStream!
+            inputStream.open()
+            outputStream.open()
+            var readByte: UInt8 = 0
+            while inputStream.hasBytesAvailable {
+                inputStream.read(&readByte, maxLength: 1)
+            }
+            
+            //outputStream.write(<#T##buffer: UnsafePointer<UInt8>##UnsafePointer<UInt8>#>, maxLength: <#T##Int#>)
+        })
+        
+        
         return false
     }
     
@@ -186,7 +207,7 @@ class AIServer : NSObject, NSCoding, Convenience {
         connectTask.resume()
         let sendReq = NSMutableURLRequest(URL: url)
         let sendStr = "NICK \(self.user.nickname)\nUSER \(self.user.name) 1 1 1:Hi this is a test"
-        sendReq.HTTPMethod = "POST"
+        sendReq.HTTPMethod = "PUT"
         sendReq.HTTPBody = sendStr.dataUsingEncoding(NSUTF8StringEncoding)!
         //sendReq.setValue("NICK \(self.user.nickname)\nUSER \(self.user.name) 1 1 1:Hi this is a test", forKey: "HTTPBody")
 
