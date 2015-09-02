@@ -174,10 +174,12 @@ class AIServer : NSObject, NSCoding, Convenience {
             inputStream.open()
             outputStream.open()
             var readByte: UInt8 = 0
-            while inputStream.hasBytesAvailable {
-                inputStream.read(&readByte, maxLength: 1)
+            if inputStream.hasBytesAvailable {
+                print("whaohf")
+                let temp = inputStream.read(&readByte, maxLength: 1)
+                
             }
-            
+            print(inputStream)
             //outputStream.write(<#T##buffer: UnsafePointer<UInt8>##UnsafePointer<UInt8>#>, maxLength: <#T##Int#>)
         })
         
