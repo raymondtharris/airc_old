@@ -30,10 +30,13 @@ enum stateType : CustomStringConvertible{
 class AIChannel:NSObject, NSCoding {
     var name: String // Name of the channel
     var unreadCount:Int // Unread count of the channel
-    //var connection:NSURLSession // Session for channel
     var channelState: stateType // State of the channel
     var mediaLibrary:[AIMedia] // Array of media found on the channel
     var autoReconnect:Bool //Recoonect to server automatically
+    
+    var inputStream:NSInputStream = NSInputStream() //Input from channel
+    var outputStream:NSOutputStream = NSOutputStream() // Out to the channel
+    
     override var description: String{ // Description of the channel
         return "ChannelName: \(name) \nState: \(channelState.description) \nUnread: \(unreadCount)"
     }
@@ -48,7 +51,6 @@ class AIChannel:NSObject, NSCoding {
     init(name:String, unreadCount: Int, channelState:stateType, autoReconnect: Bool){
         self.name = name
         self.unreadCount = unreadCount
-        //self.connection = NSURLSession.sharedSession()
         self.channelState = channelState
         self.mediaLibrary = [AIMedia]()
         self.autoReconnect = autoReconnect
@@ -56,7 +58,6 @@ class AIChannel:NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
         aCoder.encodeObject(self.unreadCount, forKey: "unreadCount")
-        //aCoder.encodeObject(self.connection, forKey: "connection")
         aCoder.encodeObject(self.mediaLibrary, forKey: "mediaLibrary")
         aCoder.encodeObject(self.channelState.description, forKey: "channelState")
         aCoder.encodeObject(self.autoReconnect, forKey: "autoReconnect")
@@ -64,7 +65,6 @@ class AIChannel:NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as! String
         self.unreadCount = aDecoder.decodeObjectForKey("unreadCount") as! Int
-        //self.connection = aDecoder.decodeObjectForKey("connectionn") as! NSURLSession
         self.channelState = aDecoder.decodeObjectForKey("channelState") as! stateType
         self.mediaLibrary = aDecoder.decodeObjectForKey("mediaLibrary") as! [AIMedia]
         self.autoReconnect = aDecoder.decodeObjectForKey("autoReconnect") as! Bool
