@@ -13,7 +13,7 @@ class AIPost:NSObject, NSCoding {
     var datePosted:NSDate
     var user:AIUser
     override var description: String{
-        return "\(user) \(datePosted): \(body)"
+        return "\(user) - \(datePosted): \(body)"
     }
     
     init(user:AIUser, datePosted:NSDate, body:String){

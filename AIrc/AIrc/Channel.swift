@@ -43,7 +43,6 @@ class AIChannel:NSObject, NSCoding {
     init(name:String){
         self.name = name
         self.unreadCount = 0
-        //self.connection = NSURLSession.sharedSession()
         self.channelState = stateType.Unconnected
         self.mediaLibrary = [AIMedia]()
         self.autoReconnect = false

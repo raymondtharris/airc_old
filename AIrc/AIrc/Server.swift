@@ -64,7 +64,6 @@ class AIServer : NSObject, NSCoding, Convenience {
         serverChannelList = [AIChannel]()
         useSecureConnection = false
         serverState = stateType.Unconnected
-        //session = NSURLSession.sharedSession()
     }
     
     init(name: String, port: Int, address: String, user: AIUser, useSecureConnection: Bool){
@@ -76,7 +75,6 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.serverChannelList = [AIChannel]()
         self.useSecureConnection = useSecureConnection
         self.serverState = stateType.Unconnected
-        //self.session = NSURLSession.sharedSession()
     }
     
     init(name: String, address: String, user: AIUser, useSecureConnection: Bool){
@@ -92,7 +90,6 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.serverChannelList = [AIChannel]()
         self.useSecureConnection = useSecureConnection
         self.serverState = stateType.Unconnected
-        //self.session = NSURLSession.sharedSession()
     }
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: "name")
@@ -103,7 +100,6 @@ class AIServer : NSObject, NSCoding, Convenience {
         aCoder.encodeObject(self.serverChannelList, forKey: "serverChannelList")
         aCoder.encodeObject(self.useSecureConnection, forKey: "useSecureConnection")
         aCoder.encodeObject(self.serverState.description, forKey: "serverState")
-        //aCoder.encodeObject(self.session, forKey: "session")
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -115,7 +111,6 @@ class AIServer : NSObject, NSCoding, Convenience {
         self.serverChannelList = aDecoder.decodeObjectForKey("serverChannelList") as! [AIChannel]
         self.useSecureConnection = aDecoder.decodeObjectForKey("useSecureConnection") as! Bool
         self.serverState = convertType( aDecoder.decodeObjectForKey("serverState") as! String)
-        //self.session = aDecoder.decodeObjectForKey("session") as! NSURLSession
     }
     
     

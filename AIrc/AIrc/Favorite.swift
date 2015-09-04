@@ -12,7 +12,7 @@ class Favorite: NSObject, NSCoding {
     var post:AIPost
     var dateFavorited:NSDate
     override var description:String{
-        return "\(dateFavorited):  \(post.description)"
+        return "Favorited: \(dateFavorited) - Post: \(post)"
     }
     init(post:AIPost){
         self.post = post

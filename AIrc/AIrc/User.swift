@@ -13,11 +13,11 @@ class AIUser:NSObject, NSCoding {
     var name:String //User name
     var nickname:String // Nickname for user
     override var description: String{ //description for user
-        return "\(name) \(nickname)"
+        return "Name:\(name) Nickname:\(nickname)"
     }
     override init(){
-        name = "User1"
-        nickname = "NickUser1"
+        self.name = "tempUser"
+        nickname = "tempNickname"
     }
     init(name:String, nickname:String){
         self.name = name

@@ -29,7 +29,7 @@ class AIMedia: NSObject, NSCoding{
     var filesize:Int // filesize of the media object
     var dateAdded: NSDate //Date object was added in chat
     override var description:String{ // description variable
-        return "\(name) \(typeOfMedia)"
+        return "Media Name: \(name) Media Type: \(typeOfMedia)"
     }
     init(name:String, typeOfMedia: mediaType, filesize: Int){
         self.name = name
