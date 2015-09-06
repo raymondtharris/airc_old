@@ -79,8 +79,15 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
         cell.nameLabel.text = self.userClient.connectedServers[indexPath.row].address
-        
+        let swipe:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeToDelete:"))
+        swipe.direction = UISwipeGestureRecognizerDirection.Left
+        cell.addGestureRecognizer(swipe)
         return cell
+    }
+    
+    func swipeToDelete(gesture: UISwipeGestureRecognizer){
+        // check state
+        // show delete buttun
     }
     
   
