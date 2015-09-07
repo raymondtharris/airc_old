@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class AIServerTableCellView: UITableViewCell {
+    var swiped:Bool = false
     @IBOutlet weak var nameLabel: UILabel!
     
 }

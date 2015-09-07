@@ -26,6 +26,10 @@ class ViewController: UIViewController {
 protocol AIClientData{
     func loadDefaults()
 }
+protocol TableViewBehaviors{
+    func slideLeft(swipe: UIGestureRecognizer)
+    func slideRight(swipe: UIGestureRecognizer)
+}
 
 
 let AddingServerNotification:String = "AddingServerNotification"
@@ -86,8 +90,17 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
     }
     
     func swipeToDelete(gesture: UISwipeGestureRecognizer){
-        // check state
-        // show delete buttun
+        let view = self.view as! UITableView
+        let cell = view.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: gesture.view?.tag as! NSIndexPath) as! AIServerTableCellView
+        
+        let location = gesture.locationInView(self.view)
+        print(location.x)
+        
+        UIView.animateWithDuration(2.5, animations: {
+            var cellFrame = cell.frame
+            cell.frame.origin.x = cellFrame.width - location.x
+        })
+        
     }
     
   
