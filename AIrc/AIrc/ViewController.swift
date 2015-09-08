@@ -91,7 +91,11 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
     
     func swipeToDelete(gesture: UISwipeGestureRecognizer){
         let view = self.view as! UITableView
-        let cell = view.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: gesture.view?.tag as! NSIndexPath) as! AIServerTableCellView
+        //view.numberOfRowsInSection(0)
+        
+        let cell = view.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: NSIndexPath(forRow: (gesture.view?.tag)! , inSection: 0) ) as! AIServerTableCellView
+        print(gesture.view?.tag)
+        print(cell.nameLabel.text!)
         
         let location = gesture.locationInView(self.view)
         print(location.x)
