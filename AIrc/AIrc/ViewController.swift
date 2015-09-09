@@ -36,7 +36,7 @@ let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
 
-class AIServerTableViewController: UITableViewController, NSStreamDelegate, AIClientData {
+class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIClientData {
     var userClient:AIClient = AIClient()
     var outputStream = NSOutputStream()
     var inputStream = NSInputStream()
@@ -85,29 +85,21 @@ class AIServerTableViewController: UITableViewController, NSStreamDelegate, AICl
         cell.nameLabel.text = self.userClient.connectedServers[indexPath.row].address
         let swipe:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeToDelete:"))
         swipe.direction = UISwipeGestureRecognizerDirection.Left
-        cell.addGestureRecognizer(swipe)
+        cell.editing = true
+        //cell.ed = UITableViewCellEditingStyle.Delete
+        //cell.addGestureRecognizer(swipe)
         return cell
     }
     
-    func swipeToDelete(gesture: UISwipeGestureRecognizer){
-        let view = self.view as! UITableView
-        //view.numberOfRowsInSection(0)
-        
-        let cell = view.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: NSIndexPath(forRow: (gesture.view?.tag)! , inSection: 0) ) as! AIServerTableCellView
-        print(gesture.view?.tag)
-        print(cell.nameLabel.text!)
-        
-        let location = gesture.locationInView(self.view)
-        print(location.x)
-        
-        UIView.animateWithDuration(2.5, animations: {
-            var cellFrame = cell.frame
-            cell.frame.origin.x = cellFrame.width - location.x
-        })
+    
+  
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
-  
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChannelViewController" {
             let tView = self.view as! UITableView
