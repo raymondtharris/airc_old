@@ -99,10 +99,19 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! AIServerTableCellView
         print(cell.nameLabel.text! + " " + indexPath.row.description)
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         self.userClient.connectedServers.removeAtIndex(indexPath.row)
         tableView.reloadData()
         
+        
+    }
+    
+    func saveDefaults( items: [String]) {
+        for item in items {
+            switch item{
+            default:  break
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
