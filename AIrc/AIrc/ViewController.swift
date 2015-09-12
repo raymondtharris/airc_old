@@ -42,6 +42,7 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
     var outputStream = NSOutputStream()
     var inputStream = NSInputStream()
     var userDefaults = NSUserDefaults.standardUserDefaults()
+    var deleteIndexPath: NSIndexPath? = nil
     
     func loadDefaults() {
         if userDefaults.objectForKey("name") != nil {
@@ -93,18 +94,43 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
     }
     
     
-  
+  /*
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    */
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! AIServerTableCellView
-        print(cell.nameLabel.text! + " " + indexPath.row.description)
-        //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        self.userClient.connectedServers.removeAtIndex(indexPath.row)
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AIServerTableCellView
+            print(cell.nameLabel.text! + " " + indexPath.row.description)
+            self.deleteIndexPath = indexPath
+            let serverToDelete = self.userClient.connectedServers[indexPath.row]
+            deleteServer(serverToDelete)
+        
+        
+        
+    }
+    func deleteServer(server:AIServer){
+        let alert = UIAlertController(title: "Delete Server", message: "Are you sure you want to remove \(server.name)?", preferredStyle: .ActionSheet)
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: executeServerDelete)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelServerDelete)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func executeServerDelete(alertAction: UIAlertAction!) {
+        let tableView = self.view as! UITableView
+        tableView.beginUpdates()
+        self.userClient.connectedServers.removeAtIndex(self.deleteIndexPath!.row)
+        print(self.deleteIndexPath!)
+        tableView.deleteRowsAtIndexPaths([self.deleteIndexPath!], withRowAnimation: .Automatic)
+        self.deleteIndexPath = nil
+        tableView.endUpdates()
         tableView.reloadData()
-        
-        
+    }
+    func cancelServerDelete(alertAction: UIAlertAction!) {
+        self.deleteIndexPath = nil
     }
     
     func saveDefaults( items: [String]) {
