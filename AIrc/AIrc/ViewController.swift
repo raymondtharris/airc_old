@@ -116,20 +116,37 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
         
         alert.addAction(DeleteAction)
         alert.addAction(CancelAction)
+        
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func executeServerDelete(alertAction: UIAlertAction!) {
+        print("deleting")
         let tableView = self.view as! UITableView
+        
         tableView.beginUpdates()
         self.userClient.connectedServers.removeAtIndex(self.deleteIndexPath!.row)
+        
+        print(self.userClient.connectedServers)
+        let tempData:NSMutableArray = NSMutableArray()
+        
+        for server in self.userClient.connectedServers {
+            //var archiver = NSKeyedArchiver()
+            tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
+        }
+        
+        self.userDefaults.setObject(tempData, forKey: "connectedServers")
+        
+        
+        
         print(self.deleteIndexPath!)
-        tableView.deleteRowsAtIndexPaths([self.deleteIndexPath!], withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths([self.deleteIndexPath!], withRowAnimation: UITableViewRowAnimation.Left)
         self.deleteIndexPath = nil
         tableView.endUpdates()
-        tableView.reloadData()
+        
     }
     func cancelServerDelete(alertAction: UIAlertAction!) {
+        print("cancel")
         self.deleteIndexPath = nil
     }
     
