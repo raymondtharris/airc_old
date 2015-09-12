@@ -32,6 +32,7 @@ protocol TableViewBehaviors{
 }
 
 
+
 let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
@@ -109,6 +110,13 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
     func saveDefaults( items: [String]) {
         for item in items {
             switch item{
+            case "connectedServers":
+                
+                break
+            case "name":
+                break
+            case "nickName":
+                break
             default:  break
             }
         }
