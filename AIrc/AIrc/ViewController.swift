@@ -37,12 +37,19 @@ let AddingServerNotification:String = "AddingServerNotification"
 let AddingChannelNotification:String = "AddingChannelNotification"
 let UpdatingClientSettingsNotification:String = "UpdatingClientSettingsNotificatin"
 
-class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIClientData {
+
+
+class AIServerTableViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,  NSStreamDelegate, AIClientData {
     var userClient:AIClient = AIClient()
     var outputStream = NSOutputStream()
     var inputStream = NSInputStream()
     var userDefaults = NSUserDefaults.standardUserDefaults()
     var deleteIndexPath: NSIndexPath? = nil
+    
+    var client:AIClient = AIClient()
+    var Servers:[AIServer] = [AIServer]()
+    
+    @IBOutlet var serversTableView: UITableView!
     
     func loadDefaults() {
         if userDefaults.objectForKey("name") != nil {
@@ -56,7 +63,7 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
             let servers = userDefaults.objectForKey("connectedServers") as! NSArray
             for server in servers {
                 //print(server as! AIServer)
-                self.userClient.connectedServers.append(NSKeyedUnarchiver.unarchiveObjectWithData(server as! NSData) as! AIServer)
+                Servers.append(NSKeyedUnarchiver.unarchiveObjectWithData(server as! NSData) as! AIServer)
             }
         }
     }
@@ -78,37 +85,30 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.userClient.connectedServers.count
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Servers.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("serverCell", forIndexPath: indexPath) as! AIServerTableCellView
-        cell.nameLabel.text = self.userClient.connectedServers[indexPath.row].address
-        let swipe:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeToDelete:"))
-        swipe.direction = UISwipeGestureRecognizerDirection.Left
-        cell.editing = true
-        //cell.ed = UITableViewCellEditingStyle.Delete
-        //cell.addGestureRecognizer(swipe)
+        cell.nameLabel.text = Servers[indexPath.row].address
+
         return cell
     }
     
     
-  /*
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+  
+     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    */
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! AIServerTableCellView
-            print(cell.nameLabel.text! + " " + indexPath.row.description)
-            self.deleteIndexPath = indexPath
-            let serverToDelete = self.userClient.connectedServers[indexPath.row]
+     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deleteIndexPath = indexPath
+            let serverToDelete = Servers[indexPath.row]
             deleteServer(serverToDelete)
-        
-        
-        
+        }
     }
+    
     func deleteServer(server:AIServer){
         let alert = UIAlertController(title: "Delete Server", message: "Are you sure you want to remove \(server.name)?", preferredStyle: .ActionSheet)
         let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: executeServerDelete)
@@ -121,56 +121,35 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
     }
     
     func executeServerDelete(alertAction: UIAlertAction!) {
-        print("deleting")
-        let tableView = self.view as! UITableView
-        
-        tableView.beginUpdates()
-        self.userClient.connectedServers.removeAtIndex(self.deleteIndexPath!.row)
-        
-        print(self.userClient.connectedServers)
-        let tempData:NSMutableArray = NSMutableArray()
-        
-        for server in self.userClient.connectedServers {
-            //var archiver = NSKeyedArchiver()
-            tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
+        if let indexPath = deleteIndexPath {
+            serversTableView.beginUpdates()
+            _ = Servers.removeAtIndex(indexPath.row)
+            serversTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            deleteIndexPath = nil
+            
+            let tempData:NSMutableArray = NSMutableArray()
+            
+            for server in Servers {
+                tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
+            }
+            userDefaults.setObject(tempData, forKey: "connectedServers")
+            userDefaults.synchronize()
+            serversTableView.endUpdates()
         }
-        
-        self.userDefaults.setObject(tempData, forKey: "connectedServers")
-        
-        
-        
-        print(self.deleteIndexPath!)
-        tableView.deleteRowsAtIndexPaths([self.deleteIndexPath!], withRowAnimation: UITableViewRowAnimation.Left)
-        self.deleteIndexPath = nil
-        tableView.endUpdates()
         
     }
     func cancelServerDelete(alertAction: UIAlertAction!) {
-        print("cancel")
         self.deleteIndexPath = nil
     }
     
-    func saveDefaults( items: [String]) {
-        for item in items {
-            switch item{
-            case "connectedServers":
-                
-                break
-            case "name":
-                break
-            case "nickName":
-                break
-            default:  break
-            }
-        }
-    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showChannelViewController" {
-            let tView = self.view as! UITableView
-            let indexPath:NSIndexPath = tView.indexPathForSelectedRow!
+            //let tView = self.view as! UITableView
+            let indexPath:NSIndexPath = serversTableView.indexPathForSelectedRow!
             let vcon = segue.destinationViewController as! AIChannelTableViewController
-            let serverToUse = userClient.connectedServers[indexPath.row]
+            let serverToUse = Servers[indexPath.row]
             vcon.title =  serverToUse.name
             vcon.connectedChannels = serverToUse.connectedChannels
             
@@ -298,11 +277,11 @@ class AIServerTableViewController: UITableViewController,  NSStreamDelegate, AIC
         let dataDictionary:Dictionary = notification.userInfo!
         print(dataDictionary)
         let serverToAdd:AIServer = AIServer(name: dataDictionary["address"] as! String, address: dataDictionary["address"] as! String, user: AIUser(name: dataDictionary["user"] as! String, nickname: dataDictionary["nickname"] as! String), useSecureConnection: dataDictionary["secure"] as! Bool)
-        self.userClient.connectedServers.append(serverToAdd)
-        print(self.userClient.connectedServers)
-        var tempData:NSMutableArray = NSMutableArray()
+        Servers.append(serverToAdd)
+        print(Servers)
+        let tempData:NSMutableArray = NSMutableArray()
         
-        for server in self.userClient.connectedServers {
+        for server in Servers {
             //var archiver = NSKeyedArchiver()
             tempData.addObject(NSKeyedArchiver.archivedDataWithRootObject(server) )
         }

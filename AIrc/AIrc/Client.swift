@@ -15,43 +15,43 @@ let pathToFile = clientDataDirectory.stringByAppendingString(clientDataFilename)
 class AIClient: NSObject, NSCoding {
     
     var settings: ClientStettings // client settings variable
-    var connectedServers:[AIServer] // Array of conencted servers
+    //var connectedServers:[AIServer] // Array of conencted servers
     var favorites:[Favorite]
     var saveDataPath: AIClientSavePath
     override var description: String{ // description string
-        return "\(settings.name) \(settings.nickName) \nConnected to \(connectedServers.count) servers."
+        return "\(settings.name) \(settings.nickName)."
     }
     override init() {
         
-        self.connectedServers = [AIServer]()
+        //self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
         self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String) {
-        self.connectedServers = [AIServer]()
+       // self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
         self.saveDataPath = AIClientSavePath()
     }
     init(name:String, nickName:String, connectedServers: [AIServer]){
-        self.connectedServers = connectedServers
+        //self.connectedServers = connectedServers
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
         self.saveDataPath = AIClientSavePath()
     }
     func addServer(server:AIServer){
-        self.connectedServers.append(server)
+        //self.connectedServers.append(server)
     }
     func removeServer(server:AIServer){
         //removes a server
         var index:Int = 0
         print(index)
-        for var i = 0; i < self.connectedServers.count; i++ {
-            if connectedServers[i].name == server.name {
-                index = i
-            }
-        }
+       // for var i = 0; i < self.connectedServers.count; i++ {
+            //if connectedServers[i].name == server.name {
+            //    index = i
+          //  }
+        //}
         //var firstHalf = self.connectedServers[0:i-1]
         
     }
@@ -64,7 +64,7 @@ class AIClient: NSObject, NSCoding {
             //display and store the data from connecting to the IRC server
         }
         task.resume()
-        addServer(server)
+        //addServer(server)
         return false
     }
     func clientExists() -> Bool{
@@ -79,7 +79,7 @@ class AIClient: NSObject, NSCoding {
     }
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.settings, forKey: "settings")
-        aCoder.encodeObject(self.connectedServers, forKey: "connectedServers")
+        //aCoder.encodeObject(self.connectedServers, forKey: "connectedServers")
         aCoder.encodeObject(self.favorites, forKey: "favorites")
     }
     required init?(coder aDecoder: NSCoder) {
@@ -88,11 +88,11 @@ class AIClient: NSObject, NSCoding {
         //Check for the file
         // if it exists load file
         self.settings = aDecoder.decodeObjectForKey("settings") as! ClientStettings
-        self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
+        //self.connectedServers = aDecoder.decodeObjectForKey("connectedServers") as! [AIServer]
         self.favorites = aDecoder.decodeObjectForKey("favorites") as! [Favorite]
         
         //else
-        self.connectedServers = [AIServer]()
+        //self.connectedServers = [AIServer]()
         self.settings = ClientStettings()
         self.favorites = [Favorite]()
     }
