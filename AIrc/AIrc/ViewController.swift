@@ -493,7 +493,7 @@ class AIServerConfigurationViewController: UIViewController {
         }
         print(newServer)
         // TestConnection
-        newServer.connectTest()
+        //newServer.connectTest()
         //newServer.connect("first")
         
         // if connection works send it to be added to the array
@@ -506,7 +506,8 @@ class AIServerConfigurationViewController: UIViewController {
         //postNotificationName("AddingServerNotification", object: self, userInfo: dataDictionary) //Need to send Object data with notificaiton post
         
         //Return to other viewcontroller
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(false)
+        //self.navigationController?.popViewControllerAnimated(true)
         
     }
     @IBAction func toggleSameCredentials(sender: AnyObject) {
